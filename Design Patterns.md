@@ -31,3 +31,4 @@ notifyObserver()
 observer -- update()// those are interfaces
 
 
+# other pattern
