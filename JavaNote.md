@@ -276,3 +276,32 @@ print100 will stop since //if(i==50)thread4.join()
 
 it will wait until it is finished
 
+There is also 
+
+MIN/MAX/NORM_PRIORITY, 1,10,5
+
+main thread is max 
+
+picks currently runnable thread with highest priority 
+
+round-robin scheduling
+
+Lambda version of the demonstration:
+
+```
+new Thread(()->{
+    try{
+        while(true)[
+            if(lblText.getText().trim().length==0)text="welcome";
+            else text = ""
+        ]
+        Platform.runLater(()-> lblText.setText(text));
+        Thread.sleep(200);
+    }
+    catch(interruptedE){
+
+    }
+}).start();
+```
+
+Using threadpools
