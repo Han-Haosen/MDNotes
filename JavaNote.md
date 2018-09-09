@@ -172,3 +172,107 @@ Sorting Array of Objects
 
 generic method for an array of Comparable objects 
 
+# Multithreading
+
+
+single-processor shares CPU time
+
+multithreading in multiple core allows you to do taskes simultaneously 
+
+
+It is done with task class that implmenet **Runnable interface**
+
+all it contains is the run method 
+
+implement the **run method**  to tell how your threa is gonna run 
+
+for exampmle:
+```
+public class TaskClass implements Runnable{
+    public TaskClass(){
+
+    }
+
+    public void run(){
+
+    }
+}
+```
+java.lang.Runnable
+```
+public class Client{
+    public void someMethod(){
+        TaskClass task = new TaskCalss();
+        Thread thread = new Thread(task);
+        thread.start();
+    }
+}
+```
+
+JVM execute the task by invoking task's run() method
+
+A real example below:
+```
+public class TaskThreadDemo{
+    
+    public static void main(String[] args){
+        Runnable printA = new PrintChar('a',100);
+        Runnable printB = new PrintChar('b',100);
+    }
+
+    Thread thread1 = new Thread(printA);
+    Thread thread2 = new Thread(printB);
+
+    thread1.start();
+    thread2.start();
+}
+
+class PrintChar implements Runnable{
+    private char charToPrint;
+    private int times;
+
+    public PrintChar(char c, int t){
+        charToPrint = c;
+        times = t;
+    }
+
+    @Override
+    public void run(){
+        for (int i = 0;i< times;i++){
+            System.out.print(charToPrint);
+        }
+    }
+}
+```
+
+methods :
+
+Thread()
+
+Thread(task:Runnable)
+
+start()
+
+isAlive() 
+
+ setPriority(int) //set p ranging from 1 to 10
+
+join() //waits for it to finish
+
+sleep(milisecond:long): void
+
+yield() // stop and allow other threads to execute 
+
+interrupt()
+
+
+InterruptedException ex -- checked when interrupt() is called
+
+join() method:
+
+thread4.join();
+
+print100 will stop since //if(i==50)thread4.join()
+
+it will wait until it is finished
+
