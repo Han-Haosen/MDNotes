@@ -305,3 +305,65 @@ new Thread(()->{
 ```
 
 Using threadpools
+
+Executor interface for executing tasks in a thread pool and the ExecutorService interface for managing and controlling tasks.
+
+java.util.concurrent.Executor
+
++execute(Runnable object) executes the task
+
+ExecutorService
+
+shutdown()/shutdownnow() returns List<Runnable>
+
+isShutdown():boolean/isTerminated():booloean
+
+
+newFixedThreadPoll(int) creates a fixed number of threads in a pool
+
+if completes, reused to execute another task
+
+if terminates new thread will be created 
+
+
+
+eg.
+
+```
+import java.util.concurrent.*;
+
+public class ExecutorDemo{
+    public static void main(String[] args){
+        ExecutorServicec executor = Executors.newFixedThreadPool(3);
+
+        executor.execute(new PrintChar(a,100));
+        executor.execute(new PrintChar(b,100));
+
+        executor.shutdown();//no new tasks and existed will continue to execute
+    }
+}
+
+```
+
+## thread synchronization 
+
+avoid race conditions 
+
+prevent more than one thread from simultanenously entering a part of the program
+
+**synchronized** keyword to synchronize the method so only one thread can access it at a time
+
+e.g
+
+`public synchronized void deposit(double amount);`
+
+such methods acquare lock before executes
+
+instance method, lock is on object
+
+static method, lock is on class
+```
+synchronized(account){
+    account.deposit(1);
+}
+```
