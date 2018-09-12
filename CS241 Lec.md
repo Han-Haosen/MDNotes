@@ -147,3 +147,20 @@ programs reside in the same memory as data they operate on
 possible to write programs that manipulate other programs
 
 operating system operate other programs/viruses
+
+
+
+how do we know whether memory contains machine instructions or data?
+
+we don't
+
+what does a machine instruction look like?
+
+machine instructions are specific sequence of 1 and 0
+
+many different machine languages
+
+processor specific
+
+
+MIPS instructions, not the full but a subset of it
