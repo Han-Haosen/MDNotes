@@ -103,3 +103,33 @@ falsehood) if [A] = F for all Boolean valuations.
 
 A contingent formula is one that is neither a tautology
 nor a contradiction.
+
+# SE212 Tutorial 1
+
+command of george start with #
+
+```
+#check PROP //syntax check for propositional logic
+
+a => ((b & !c) | (b | (!d)))
+
+
+formalize logic in george
+a => b
+a:= dog is barking
+b:= dog is in the house
+```
+
+
+formalize logics
+
+```
+if dog in the house then someone is at the front door unless dog is not barking
+
+a = dog in the house
+b = someone at front door
+c = dog is barking
+
+a => b | !c
+
+```
