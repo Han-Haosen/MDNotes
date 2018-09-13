@@ -133,3 +133,41 @@ c = dog is barking
 a => b | !c
 
 ```
+
+## Lec 4
+
+soundness means that something is valid
+
+complete really is true then a series of steps to prove it
+
+satisfiable, contingent, tautology, contradiction
+
+contingent means it is satisfiable
+
+satisfiable maybe tautology , could be contingent
+
+
+logically equivalent if for all boolean valuations p = q
+
+p <=> Q
+
+p <=> q iff |= p <-> q
+
+<-> is a material equivalence , syntactic symbol
+
+logical equivalence for <=>, semantic symbol
+
+
+collection of forumlas is consistent if there is a boolean valuation
+
+in which all formulas are true
+
+r->s AND s -> -h AND r AND h
+
+one evaluation where all is correct?
+
+from truth table, no
+
+p is not Q?
+
+prove |= p<=>Q
