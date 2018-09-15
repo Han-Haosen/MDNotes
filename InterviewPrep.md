@@ -107,3 +107,69 @@ for(var i=0...){
 ```
 
 ## Flexbox 
+
+
+# Cracking the coding interview
+
+var googol = (number) =>{
+    for(let i =0;i<100;i++){
+        number = number * number;
+    }
+    return number;
+}
+
+console.log(googol(1));//anything larger than 1 will overflow
+
+
+Interview prep grid
+
+challenges
+mistakes
+enjoyed
+leadership
+conflicts
+what will do differently
+
+## BIG O
+
+algorithm is do this then when all done, add run times
+
+do this for each time : multiply 
+
+Amortized time
+
+Arraylist is implmeneted with an array
+
+when array hits capacity, Arraylist class will create a new array with double and copy all into one
+
+-- basically worst case is o(N) but most of the time is O(1)
+
+recursive run time
+
+depth N 
+
+o(2^n)
+
+for a finobacchi recursive call
+
+depth: for a balanced BST, N total nodes depth = log n
+
+all permultations of a string 
+
+```
+void permutation(String str){
+    permutation(str,"");
+}
+
+void permutation(String str, String prefix){
+    if length == 0 print(prefix);
+}else{
+    for(int i=0;i<str.length();i++){
+        String rem = str.substring(0,i)+str.substring(i+1);
+        permutation(rem,prefix+str.charAt(i))
+    }
+}
+```
+
+through memonization can get O(n)
+
