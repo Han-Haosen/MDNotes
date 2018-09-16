@@ -600,3 +600,8 @@ from O(k^d) to O(k^d/2)
 0110 * 2 = 0110 shifted left by 1
 
 XOR a bit with own negative, always 1
+
+## Quirky Questions
+
+Primality 
+
