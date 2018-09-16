@@ -605,3 +605,77 @@ XOR a bit with own negative, always 1
 
 Primality 
 
+## OOP 
+
+Step 1: Handle Ambiguity 
+
+intentionally vague so test whether you make assumpetions or ask clarifying questions
+
+Step 2: Define core objects
+
+Step 3: Analyze relationships 
+members?inherit?many to many or one to many?
+
+Step 4: Investigate Actions
+
+
+Design patterns :
+
+Singleton and Factory
+
+Singleton:
+
+Class only one instance and ensures access to the instance through the application
+
+global object 
+
+```
+e.g
+
+private static Restaurant _instance = null;
+protected Restaurant(){}
+public static Restaurant getInstance(){
+    if(_instance == null){
+        _instance = new Restaurant()
+    }
+    return _instance;
+}
+```
+
+Factory method
+
+interface for creating an instance of a class, with subclasses deciding which to instantiate.
+
+e.g
+
+```
+public class Card Game{
+    public static CardGame createCardGame(GameType type){
+        if(type == GameType.Poker){
+            return new PokerGame();
+        }else{
+            return new BlackJackGame();
+        }
+    }
+}
+```
+
+
+## Recursion and Dynamic Programming 
+
+recursion: built off of subproblems
+
+Bottom-Up approach 
+
+start with simple to two, three and so on
+
+Top-down approach
+
+divide them into subproblems, may overlap
+
+half and half 
+
+Dynamic Programming 
+
+taking recursive and find overlapping subproblems
+
