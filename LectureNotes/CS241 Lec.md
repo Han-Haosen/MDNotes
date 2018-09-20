@@ -282,3 +282,170 @@ lis $4
 mult $5,$4
 
 need hi and lo
+
+# Lecture Sep 18
+
+mult $a $b
+
+product is 64 bits
+
+too big to handle so use hi and Lo
+
+2 special register
+
+$a*$b => hi:lo
+
+special instructions
+
+mf lo $a move from lo to $a
+mf hi $a move from hi to $a
+
+hi stores the remainder for division
+
+low stores the quotient
+
+implementing a procedure f
+
+call and return
+
+how do we transfer control into and out of f?
+
+what if f calls another procedure g
+
+how do we pass in parameters?
+
+what if f that we call overwrites data another procedure is using?
+
+implement the call stack
+
+keep track of what is in use
+
+MIPS $30 initialized by the loader
+to just passed the last word in memory
+
+we can use $30 as a bookmark to separate used
+and unused RAM if allocate from the bottom
+
+f calls g, g calls h, h returns, g returns , f returns
+
+f registers
+
+g registers
+
+g calls h , save h Registers
+
+use RAM to save content of registers we want to use
+
+strategy :
+
+each procedure stores in RAM
+
+the registers it wants to use
+
+and restores them when return
+
+RAM used LIFO => Stack
+
+$30 is a stack pointer that contains the address of the top of the stack
+
+Templates:
+
+f:sw $2,1($30)
+sw $3, -8($30)
+
+two registers into RAM
+
+push regs $2 and $3 into RAM
+
+lis $3
+.word 8
+sub $30 $30 $3 //decrement stack pointer $30
+place body of f here
+add $30,$30,$3
+lw $3, -8($30)
+lw $2, -4($30)
+
+
+call: main:
+lis $s
+.word f ;addr of line lablled f
+jr $s  ;jump
+(HERE)
+f: ;address of that line in memory
+return?
+
+need to set PC to the line right after jr
+
+i.e here
+
+jalr
+
+jump and link to the current register
+
+save $31 on the stack too
+
+main:
+lis $5
+.word f
+sw $31, -4($30)
+lis $31
+.word 4
+sub $30,$30,$31
+jalr $5
+lis $31
+.word 4
+add $30,$30,$31
+lw $31, -4($30)
+jr $31
+
+jr $31
+
+parameter and result passing
+
+generally use Registers //so write docs about it
+
+too many then use Stack
+
+e.g Proc sum to N
+
+sum to N adds numbers 1 .. N
+
+$1 working
+$2 input
+$3 output
+
+sum1toN
+sw $1,-4($30)
+sw $2 -8($30)
+lis $1
+.word 8
+sub $30,$30,$1
+lis $1
+.word -1
+add $3,$0,$0
+topofLoop :add $3,$2,$3
+add $2,$2,$2
+bne $2,$0 topofLopp
+
+lis $1
+.word 8
+add $30,$30,$1
+lw $1,-4($30)
+lw $2 -8($30)
+jr $31
+
+I/O output sw to 0xffff000c
+
+prints least significant byte to screen
+
+input : lw from 0xffff0004
+next character from std in will be the least significant byte
+
+
+Quick E.g
+
+lis $1
+.word 0xffff000c
+lis $2
+.word 67
+sw $2,0($1)

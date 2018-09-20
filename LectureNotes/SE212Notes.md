@@ -171,3 +171,17 @@ from truth table, no
 p is not Q?
 
 prove |= p<=>Q
+
+## Tutorial Sep 19
+
+P=>q p AND r |= q
+
+p<=>q P OR NOT r |= q
+
+p <=> q
+= p AND q OR NOT p and NOT Q
+
+which is
+P => Q AND Q => P equivalence
+(NOT P OR Q) AND (NOT Q OR P)
+((NOT P OR Q) AND TRUE) AND ((NOT Q OR P) AND TRUE)
