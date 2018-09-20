@@ -449,3 +449,17 @@ lis $1
 lis $2
 .word 67
 sw $2,0($1)
+
+
+# Lecture Sep 20
+
+Assembler
+
+input assembly, out put machine
+
+analysis and synthesis
+
+analysis - understnad the meaning of source strings
+synthesis output equivalent machine
+
+assembly file - stream of characters

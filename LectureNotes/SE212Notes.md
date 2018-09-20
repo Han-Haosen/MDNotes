@@ -185,3 +185,4 @@ which is
 P => Q AND Q => P equivalence
 (NOT P OR Q) AND (NOT Q OR P)
 ((NOT P OR Q) AND TRUE) AND ((NOT Q OR P) AND TRUE)
+change TRUe to P OR NOT P  
