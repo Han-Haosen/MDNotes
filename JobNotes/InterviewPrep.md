@@ -679,3 +679,9 @@ Dynamic Programming
 
 taking recursive and find overlapping subproblems
 
+## Solution to nodes and graphs
+
+No 1 
+
+Given a directed graph, find out whether there is a route
+

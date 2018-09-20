@@ -225,3 +225,9 @@ Float64Array 64位IEEE浮点数
 
 ## Stack
 
+# Javascript language
+
+javascript objects
+
+mapping strings to values 
+
