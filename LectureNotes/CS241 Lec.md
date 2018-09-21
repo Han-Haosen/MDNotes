@@ -282,3 +282,310 @@ lis $4
 mult $5,$4
 
 need hi and lo
+
+# Lecture Sep 18
+
+mult $a $b
+
+product is 64 bits
+
+too big to handle so use hi and Lo
+
+2 special register
+
+$a*$b => hi:lo
+
+special instructions
+
+mf lo $a move from lo to $a
+mf hi $a move from hi to $a
+
+hi stores the remainder for division
+
+low stores the quotient
+
+implementing a procedure f
+
+call and return
+
+how do we transfer control into and out of f?
+
+what if f calls another procedure g
+
+how do we pass in parameters?
+
+what if f that we call overwrites data another procedure is using?
+
+implement the call stack
+
+keep track of what is in use
+
+MIPS $30 initialized by the loader
+to just passed the last word in memory
+
+we can use $30 as a bookmark to separate used
+and unused RAM if allocate from the bottom
+
+f calls g, g calls h, h returns, g returns , f returns
+
+f registers
+
+g registers
+
+g calls h , save h Registers
+
+use RAM to save content of registers we want to use
+
+strategy :
+
+each procedure stores in RAM
+
+the registers it wants to use
+
+and restores them when return
+
+RAM used LIFO => Stack
+
+$30 is a stack pointer that contains the address of the top of the stack
+
+Templates:
+
+f:sw $2,1($30)
+sw $3, -8($30)
+
+two registers into RAM
+
+push regs $2 and $3 into RAM
+
+lis $3
+.word 8
+sub $30 $30 $3 //decrement stack pointer $30
+place body of f here
+add $30,$30,$3
+lw $3, -8($30)
+lw $2, -4($30)
+
+
+call: main:
+lis $s
+.word f ;addr of line lablled f
+jr $s  ;jump
+(HERE)
+f: ;address of that line in memory
+return?
+
+need to set PC to the line right after jr
+
+i.e here
+
+jalr
+
+jump and link to the current register
+
+save $31 on the stack too
+
+main:
+lis $5
+.word f
+sw $31, -4($30)
+lis $31
+.word 4
+sub $30,$30,$31
+jalr $5
+lis $31
+.word 4
+add $30,$30,$31
+lw $31, -4($30)
+jr $31
+
+jr $31
+
+parameter and result passing
+
+generally use Registers //so write docs about it
+
+too many then use Stack
+
+e.g Proc sum to N
+
+sum to N adds numbers 1 .. N
+
+$1 working
+$2 input
+$3 output
+
+sum1toN
+sw $1,-4($30)
+sw $2 -8($30)
+lis $1
+.word 8
+sub $30,$30,$1
+lis $1
+.word -1
+add $3,$0,$0
+topofLoop :add $3,$2,$3
+add $2,$2,$2
+bne $2,$0 topofLopp
+
+lis $1
+.word 8
+add $30,$30,$1
+lw $1,-4($30)
+lw $2 -8($30)
+jr $31
+
+I/O output sw to 0xffff000c
+
+prints least significant byte to screen
+
+input : lw from 0xffff0004
+next character from std in will be the least significant byte
+
+
+Quick E.g
+
+lis $1
+.word 0xffff000c
+lis $2
+.word 67
+sw $2,0($1)
+
+
+# Lecture Sep 20
+
+Assembler
+
+input assembly, out put machine
+
+analysis and synthesis
+
+analysis - understnad the meaning of source strings
+synthesis output equivalent machine
+
+assembly file - stream of characters
+
+group characters into meaning tokens
+
+asm.cc
+
+your job:
+
+  group tokens into instructions
+  output equivalent machine code
+  anything else is Error -- to stderr
+
+Big problem :
+  beq $2,$1,here //how to branch things?? recognize labels?
+  standard sdn?
+
+group tokens into instructions
+record addresses of all labelled instructions "symbol table"
+-list of (label, address) pairs
+
+a line of assembly may have multiple labels
+
+f:
+g:
+
+mult $1,$2
+
+translate each instr to machine code:
+
+lookup labels as required
+
+output assembled MIPS to stdout
+
+output symbol table to stderr
+
+ex:
+
+  main: list $2
+  .word 13
+  top:
+  add $3,$0,$0
+  lis $1
+  .word -1
+  add $2,$2,$1
+  bne $2,$0,top
+  jr $31
+  Beyond:
+
+pass 1
+group tokens
+build symbol table
+first label (main, 0x0)
+second label (top, 0xc)
+beyond:(0x24)
+
+pass 2
+translate each instruction
+
+lis $2 0000 0000 0000 0000 0001 0000 0001 0000
+.word  0000 1101...
+
+write it in hex
+
+= 0x0000000d
+
+lookup top (0xc)
+
+bne // offset
+
+calculation --
+
+(top-pc)/4
+
+= -5
+= 0xfffb
+
+2's complement flip and add 1
+
+bne = 000101 = 510 /opcode
+
+6 bits opcode
+5 bits registers
+5 bits registert
+16 bits offset = -5
+
+to put 000101 into first 6 bits
+need to append 26 0s
+=> left-shift by 26 bits
+
+int instr = 339804155;
+char c = instr >> 24; ///move the most to least significant bytes
+cout<<c;
+char c2 = instr >> 16;// etc
+
+Formal languages
+
+Assembly lang /high level language
+
+translation to ML not ambiguous, 1 to 1 // no single translation
+
+recognition easy // harder
+
+structure
+
+definitions:
+
+alphabets : finite set of symbols
+
+string or word finite sequence of symbols from alphabet
+
+length of a strings
+
+empty strings
+
+languages set of strings
+
+language of strings where we have an
+
+E empty strings
+
+{} empty languages
+
+{e} language with 1 string, the empty string
+
+symbols can be anything
+
+e = {dot, dash} l = {valid English words in morse codes}
