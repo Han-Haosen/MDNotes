@@ -229,19 +229,19 @@ Float64Array 64位IEEE浮点数
 
 javascript objects
 
-mapping strings to values 
+mapping strings to values
 
-# Making your Blog 
+# Making your Blog
 
-4.6 Connecting to your Mongodb 
+4.6 Connecting to your Mongodb
 
-using Mongolass 
+using Mongolass
 
-or node-mongodb-native 
+or node-mongodb-native
 
-or mongoose 
+or mongoose
 
-e.g 
+e.g
 
 ```
 exports.User = mongolass.model(
@@ -255,11 +255,150 @@ exports.User = mongolass.model(
 exports.User.index({name:1},{unique:true}).exec();
 ```
 
-use express-formidable to handle form 
+use express-formidable to handle form
 
 ```
 app.use(require('express-formidable')({
   uploadDir: path.join(__dirname, 'public/img'), // 上传文件目录
   keepExtensions: true// 保留后缀
 }))
+```
+
+## Dictionary
+
+key value pairs
+
+ES6 has a map class
+
+```
+this.set = function(key,value){
+  items[key] = value;
+};
+
+this.delete = function(key){
+  if(this.has(key)){
+    delete items[key];
+    return true;
+  }
+  return false;
+};
+
+this.get = function(key){
+  return this.has(key) ? items[key]:undefined;
+}
+
+
+```
+
+## Hash table
+
+function HashTable(){
+  var table = [];
+}
+
+put/remove/get
+
+
+## Sets
+
+no duplicate
+
+unordered
+```
+function Set(){
+  let items = {};
+}
+```
+
+using an object to represent
+
+methods:
+
+```
+add(value)
+delete(value)
+has(value)
+clear()
+size()
+values() // return an Array
+
+
+this.has = function(value){
+  return value in items;
+  //return items.hasOwnProperty(value);
+};
+
+in operator
+
+this.add = function(value){
+  if(!this.has(value)){
+    items[value] = value;
+    return true;
+  }
+  return false;
+};
+
+this.size = function(){
+  return Object.keys(items).length;
+};
+
+this.values = function(){
+  let values = [];
+  for(let i = 0,keys=Object.keys(items);i<keys.length;i++){
+    values.push(items[keys[i]]);
+  }
+  return values;
+}
+
+```
+
+Set operations:
+
+Union/intersection/difference/subset
+
+```
+this.union = function(otherSet){
+  let unionSet = new Set();
+
+  let values = this.values();
+  for(let i = 0;i < values.length; i++){
+    unionSet.add(values[i]);
+  }
+
+  values = otherSet.values();
+  for(let i = 0;i < values.length; i++){
+    unionSet.add(values[i]);
+  }
+  return unionSet;
+}
+```
+
+```
+this.intersection = function(otherSet){
+ let intersectionSet = new Set(); //{1}
+ let values = this.values();
+ for (let i=0; i<values.length; i++){ //{2}
+ if (otherSet.has(values[i])){ //{3}
+ intersectionSet.add(values[i]); //{4}
+ }
+ }
+ return intersectionSet;
+}
+
+//for difference, !otherSet.has(values)
+```
+
+
+for subset :
+
+check if size is larger and then if !others.has, false
+
+ES6 Set class:
+
+
+```
+let set = new Set();
+set.add(1);
+set.values() // returns an iterator instead of Array
+set.size //since it's a property
 ```
