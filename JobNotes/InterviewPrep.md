@@ -685,3 +685,68 @@ No 1
 
 Given a directed graph, find out whether there is a route
 
+```
+
+BFS
+
+enum State {unvisited,visited,visiting;}
+
+boolean search(Graph g, Node start, Node end){
+    if(start = end) return true;
+
+    LinkedList<Node> q = new LinkedList<Node>();
+    for(Node u: g.getNodes()){
+        u.state = State.unvisited;
+    }
+    start.state = state.Visiting;
+    q.add(start);
+    Node u;
+    while(!q.isEmpty()){
+        u = q.removeFirst();
+        if(u != null){
+            for(Node v: u.getAdjacent()){
+                if(v.state == State.unvisited){
+                    if(v == end){
+                        return true;
+                    }else{
+                        v.state = State.Visiting;
+                        q.add(v);
+                    }
+                }
+            }
+            u.state = State.Visited;
+        }
+    }
+    return false;
+}
+```
+
+
+Q2 Given a sorted array with unique integer elements, write an algo to create a BST with minimal height
+
+```
+Match number of nodes of L to R
+
+1. insert into T the middle element
+2. insert into left the left subarray elements
+3. insert the right subarray elements
+4. recurse
+
+TreeNode CMBST(int array[]){
+    return createMinimalBST(array,0,array.length-1);
+}
+
+TreeNode CMBST(int arr[],int start,int end){
+    if(end < start){
+        return null;
+    }
+    int mid = (start + end)/2
+    TreeNode n = new TreeNode(arr[mid]);
+    n.left = CMBST(arr,start,mid-1);
+    n.right = CMBST(arr,mid+1,end);
+    return n;
+}
+```
+
+Q3 List of depths 
+
