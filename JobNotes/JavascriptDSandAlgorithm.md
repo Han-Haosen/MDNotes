@@ -236,3 +236,30 @@ mapping strings to values
 4.6 Connecting to your Mongodb 
 
 using Mongolass 
+
+or node-mongodb-native 
+
+or mongoose 
+
+e.g 
+
+```
+exports.User = mongolass.model(
+  'User',{
+    name:{type:'string',required:true},
+    password:{type:'string',required:true},
+    gender:{type:'string',enum:['m','f'],default:'m'}
+  }
+)
+
+exports.User.index({name:1},{unique:true}).exec();
+```
+
+use express-formidable to handle form 
+
+```
+app.use(require('express-formidable')({
+  uploadDir: path.join(__dirname, 'public/img'), // 上传文件目录
+  keepExtensions: true// 保留后缀
+}))
+```
