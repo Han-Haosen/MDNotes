@@ -463,3 +463,129 @@ analysis - understnad the meaning of source strings
 synthesis output equivalent machine
 
 assembly file - stream of characters
+
+group characters into meaning tokens
+
+asm.cc
+
+your job:
+
+  group tokens into instructions
+  output equivalent machine code
+  anything else is Error -- to stderr
+
+Big problem :
+  beq $2,$1,here //how to branch things?? recognize labels?
+  standard sdn?
+
+group tokens into instructions
+record addresses of all labelled instructions "symbol table"
+-list of (label, address) pairs
+
+a line of assembly may have multiple labels
+
+f:
+g:
+
+mult $1,$2
+
+translate each instr to machine code:
+
+lookup labels as required
+
+output assembled MIPS to stdout
+
+output symbol table to stderr
+
+ex:
+
+  main: list $2
+  .word 13
+  top:
+  add $3,$0,$0
+  lis $1
+  .word -1
+  add $2,$2,$1
+  bne $2,$0,top
+  jr $31
+  Beyond:
+
+pass 1
+group tokens
+build symbol table
+first label (main, 0x0)
+second label (top, 0xc)
+beyond:(0x24)
+
+pass 2
+translate each instruction
+
+lis $2 0000 0000 0000 0000 0001 0000 0001 0000
+.word  0000 1101...
+
+write it in hex
+
+= 0x0000000d
+
+lookup top (0xc)
+
+bne // offset
+
+calculation --
+
+(top-pc)/4
+
+= -5
+= 0xfffb
+
+2's complement flip and add 1
+
+bne = 000101 = 510 /opcode
+
+6 bits opcode
+5 bits registers
+5 bits registert
+16 bits offset = -5
+
+to put 000101 into first 6 bits
+need to append 26 0s
+=> left-shift by 26 bits
+
+int instr = 339804155;
+char c = instr >> 24; ///move the most to least significant bytes
+cout<<c;
+char c2 = instr >> 16;// etc
+
+Formal languages
+
+Assembly lang /high level language
+
+translation to ML not ambiguous, 1 to 1 // no single translation
+
+recognition easy // harder
+
+structure
+
+definitions:
+
+alphabets : finite set of symbols
+
+string or word finite sequence of symbols from alphabet
+
+length of a strings
+
+empty strings
+
+languages set of strings
+
+language of strings where we have an
+
+E empty strings
+
+{} empty languages
+
+{e} language with 1 string, the empty string
+
+symbols can be anything
+
+e = {dot, dash} l = {valid English words in morse codes}
