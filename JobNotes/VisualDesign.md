@@ -11,3 +11,9 @@ And text-align: left; (the default) left-aligns the text.
 width:200px;
 
 <strong></strong>
+
+<s>
+<u>
+<em>
+<b>
+<hr>
