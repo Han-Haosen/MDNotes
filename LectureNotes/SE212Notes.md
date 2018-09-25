@@ -186,3 +186,82 @@ P => Q AND Q => P equivalence
 (NOT P OR Q) AND (NOT Q OR P)
 ((NOT P OR Q) AND TRUE) AND ((NOT Q OR P) AND TRUE)
 change TRUe to P OR NOT P  
+
+## Lecture Sep 25
+
+natural deduction
+
+b => c premise
+prove !b | c
+
+b | !b by lem
+
+3) case b{
+  c by imp_e on 1,3
+  !b | c by or_i on 4
+} case !b{
+  !b | c by or_i on b
+}
+!b | c by cases on 2,3-5,6-7
+
+may get premises don't match goal, check params
+
+semantic tableux
+
+consistent -- one boolean valuation where everything is true
+
+it is a tree
+
+either pick up one compound formula
+
+or close a branch because it contains contradictory formulas
+
+if all brnaches contains contradictory formulas then the premises are inconsistent
+
+prove b&c,d, !(c&d) is an inconsistent set of formulas
+|and_nb on|
+4)b
+5)c  not-and-bran 3
+
+6) !c (closed on 5,6) 7 !d closed on 2,7 so inconsistent
+
+a branch is closed if p and not p both appear on the path from root to leaf
+
+1 r=>s
+2 s=> !h
+3 r
+4 h
+
+imp_br on 1
+5 !r closed on 3 and 5 | 6 s impl branch 2
+7 !s closed on 6,7 8 !h closed on 4,8
+
+thus it is an inconsistent set of formulas
+
+show valid, use a ST to show that premises and !Q is invalid
+
+prove B | !b
+
+1 !(b | !B)
+not_or_nb on 1
+2 !b
+3 !!b //just closed on 2,3  
+not_not_nb on 3
+4 b
+closed on 2,4
+
+p, p <=> q |- q
+1 p
+2 p<=>q
+3 !q
+
+
+iff_br on 2
+4 p & q 5 !p & !q
+and nb on 4  and nb on 5
+6 p        8 !p
+7 q       9!q
+
+closed on 3,7 closed on 1,8
+
+invalid provide a boolean valuation in which premises are T and conclusion is F
