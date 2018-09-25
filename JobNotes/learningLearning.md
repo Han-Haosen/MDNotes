@@ -186,3 +186,83 @@ interleaving builds flexibility and creativity
 
 2 25min sessions 
 
+# procrastination 
+
+building solid chunks of memory 
+
+and you need to put in time
+
+psychology of procrastination 
+
+habitual avoidance 
+
+it shares features with addiction 
+
+from little things to worse things 
+
+when you chunk it , it becomes a habit
+
+it frees up your mind 
+
+don't need to think 
+
+habits has the cue triggers your zombie mode 
+
+the routine 
+
+the reward 
+
+the belief // because you believe yourself 
+
+process vs product 
+
+mental tools and tricks 
+
+focus on process not product 
+
+avoid concentrating on product 
+
+building processes, relate to simple habits 
+
+product triggers pain 
+
+spread in different sessions 
+
+finish a session, not finishing the process 
+
+no noises when you want to concentrate 
+
+change the reaction to the cue 
+
+what your cue is ? location/time/how you feel
+
+the routine :
+
+have a plan, developing a new ritual 
+
+productive effects 
+
+life and learning 
+
+weekly list of key tasks 
+
+daily todo -- write the evening before 
+
+goal finishing time 
+
+9 pm for me 
+
+diving deeper into memory 
+
+spacial memory system 
+
+images are important to your memory 
+
+repeat your images and patterns 
+
+firmly lodged into long term memory 
+
+handwriting can help you encode 
+
+interleave your learning 
+
