@@ -589,3 +589,56 @@ E empty strings
 symbols can be anything
 
 e = {dot, dash} l = {valid English words in morse codes}
+
+## Lec Sep 25
+
+automatically recognize if word w is in language
+
+charaterize according to how hard they are to recognize
+
+finite regular language
+context free/context sensitive
+recursive
+
+finite language
+
+only finite # of strings in your language
+
+ex L = {cat,car,cow}
+
+read left to right
+
+if 1st char is 'c'
+  if 2nd char is 'a'
+    if 3rd char is 't'
+  else if 2nd char is 'o'
+
+
+each of those bubbles as states
+
+scanner or tokenizrs
+
+e = {ASCII } L = {tokens for MIPS }
+
+regular languages
+
+built from finite lanugages
+
+union L1 U l2 or concatenation L1*L2
+
+repetition kleene *
+
+regular expressions  E1|E2 E1 . E2
+
+set notation L1 U L2 L1L2
+
+description
+
+precedence * before ./repetiiton aa* = a(a*)
+. beofre | aa|b = (aa)|b
+
+is C regular ?
+
+start state
+
+set of accepting state
