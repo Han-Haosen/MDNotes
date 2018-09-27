@@ -265,3 +265,75 @@ and nb on 4  and nb on 5
 closed on 3,7 closed on 1,8
 
 invalid provide a boolean valuation in which premises are T and conclusion is F
+
+## Lec Sep 27
+
+Predicate logic
+
+all p are q
+x is p
+therefore x is q
+
+a,b |- c
+
+refer to a value
+
+symbolize both a claim and the value about which the claim is made
+
+relations
+
+unary predicates
+
+ravi is an adult
+
+adult(ravi)
+
+round(earth)
+
+duck(Esmerelda) ^ likes(E,water)
+Everything likes Fridays
+
+for all x likes(x,Fridays )
+
+for some X rotten(x) AND in (x,Denmark)
+
+something is rotten in the state of Denmark
+
+for all x adult(x) ^ tall(x)
+
+for all y happy(y) | hungry(y)
+
+for all x child(x) => likes(x,micky)
+
+northof(birthplace(E),Toronto)
+
+for all x value("input") = x => value(output) = x^2
+
+p(k(x,y,g(z)),h(x)) ^ q(x,c) both side well formed
+
+terms describe values
+
+for all x k(x,y,g(x)) not a well formed formula
+
+for all x p(x,y) is a wff
+
+for all x q(p(x)) no not a well formed formulas
+
+
+everything doesn't like something
+
+for all x exists y !likes(x,y)
+
+!(for some x for all y likes(x,y))
+
+for all x b(x) => g(x)
+
+for some x b(x) => g(x)
+
+older(x,y) means x is older than y
+
+scope of qualifiers
+
+free variable not in the scope of quantifier
+
+for all x student(x) & likes(x,SE) => like(X,logic)
