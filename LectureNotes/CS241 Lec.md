@@ -642,3 +642,39 @@ is C regular ?
 start state
 
 set of accepting state
+
+
+Lec Sep 27,2018
+
+If I can make a DFA, can automate
+
+alphabet,set of states, start state, accepting state, transition function
+
+Theta(Q,e) -> Q or Q2 // if not then crash
+
+DFA with actions
+
+possible actions
+
+state look up
+
+alphabet: 0,1
+
+1(1|0)* | 0 //start with 1 and then later repetition of 1 or 0s leading 0 means more than one 0 after the first 0
+
+special cases?
+
+ start -> (0 | N<-0) -> accepting states
+ start -> (1 | N<-1) ->(1|N*2+1,0|N*2) accepting state
+
+ simultaneously compute value of number
+
+ Deterministic and ND
+
+ NDFA
+
+ more complex?
+
+ New Machine e NFAs transition on epsilon
+
+ one state to another state without reading
