@@ -750,3 +750,233 @@ TreeNode CMBST(int arr[],int start,int end){
 
 Q3 List of depths 
 
+# GeekforGeeks
+
+Longest Common sequence 
+
+Naive: generate all subsequences and find longest matching
+
+step by step, decrease it like this:
+
+Consider the input strings “ABCDGH” and “AEDFHR. Last characters do not match for the strings. So length of LCS can be written as:
+
+L(“ABCDGH”, “AEDFHR”) = MAX ( L(“ABCDG”, “AEDFHR”), L(“ABCDGH”, “AEDFH”) )
+
+expontential not good
+
+use memonization or tabulation to do it 
+
+
+
+# JS interview questions 
+
+No 1 Let vs Const
+
+let is block scoped 
+
+const don't let you change value
+
+const c; //c = undefined can't change 
+
+var hoisting 
+
+object const can't reassign but can modify 
+
+difference between null and undefined?
+
+empty value
+
+when declare but not define it yet,undefined
+
+null is you do it yourself 
+
+typeof(null) = object 
+
+arrow function 
+
+arrow function 
+
+the this.firstName might be linked to window object 
+
+prototypal inheritance 
+
+objects have a property called prototype 
+
+e.g
+```
+let car = function(model){
+    this.model = model;
+}
+
+car.protytype.getModel = function(){
+    return this.model;
+}
+
+let toyota = new car('a');
+console.log(toyota.getModel());
+
+```
+
+promises 
+
+let a = function(){
+
+}
+
+didn't get hoisted 
+
+$.ajax({
+    url:"a.json"
+    success:function(r){
+        $.ajax({
+            url:"b.json" + r.a,
+            success...
+        })
+    }
+})
+
+traditional way 
+
+var p1 = new Promise(function(resolve,reject){
+    resolve($.ajax('a.json');)
+});
+
+p1.then(function(r)){
+    return new Promise()
+}).then(function(result){
+    ...
+})
+
+
+setTimeout()
+
+console.log('a');
+
+setTimeout(function(){
+    console.log('a');
+},0);
+
+actually b c and a even though 0 time out
+
+async comes after sync 
+
+closure 
+
+let obj = function(){
+    let i = 0;
+
+    return {
+        setI(k){
+            i=k;
+        },
+        getI(){
+            return i;
+        }
+    }
+}
+
+let x = obj();
+
+x.setI(2);
+console.log(x.getI());
+returns 2 but you can't access it 
+
+
+## Mock interviews 
+
+something you have done in JS?
+
+let x = {
+    a:1,
+    b:2
+};
+
+xArr = [];
+for(i in x){
+    xArr.push(i);
+}//?
+
+str.split('').reverse().join('');
+
+Object.values
+
+const obj = {
+    a:1,
+    a:2,
+    getA(){
+        console.log(this.a)
+        return this;
+    },
+    getB(){
+        console.log(this.b)
+    }
+}
+
+obj.getA().getB();
+
+[1,2].print();
+
+Array.prototype.print = () =>{
+    //dynamic method
+    /*
+    let result = '';
+    this.forEach(elem => {
+        result += `${elem},`;//add an if to avoid extra comma
+    })
+    console.log(result);
+
+
+    */
+    console.log(`${this[0],$this[1]}`);//specific cases
+}
+
+const a = function(x){
+    this.x = x;
+};
+a.prototype = {
+    getX()[
+        return this.x;
+    ]
+}
+
+const b = function(x,y){
+    this.y = y;
+    a.call(this.x)
+};
+
+const newB = new b('x','y');
+
+object.defineProperty(object, descriptors)
+
+object.defineProperty(person,"language",{value:"yes"}),
+
+
+object.entries(obj) //return pairs
+object.keys(obj);
+Object.values(obj);
+
+function Person()[
+
+]
+Person.prototype.nationality = "English"
+
+JS Forms 
+
+function validateForm(){
+    var x = document.forms["myForm"]["fname"].value;
+    if (x == ""){
+        ...
+    }
+}
+```
+<form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+Name: <input type="text" name="fname">
+<input type="submit" value="Submit">
+</form>
+```
+
+required attribute 
+
+Array.find(func) returns value that passes a test 
+
+
