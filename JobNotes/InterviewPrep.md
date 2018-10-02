@@ -979,4 +979,216 @@ required attribute
 
 Array.find(func) returns value that passes a test 
 
+Array.findIndex()
+
+index of the first array element that passes a function 
+
+isInteger 
+
+isSafeInteger 
+
+Arrow function have NO this 
+
+functions are hoisted, not functions defined using an expression 
+
+function expressions will execute auto if followed by ()
+
+```
+(function () {
+    var x = "Hello!!";      // I will invoke myself
+})();
+```
+
+accessing using arguments object 
+
+```
+x = findMax(1, 123, 500, 115, 44, 88);
+
+function findMax() {
+    var i;
+    var max = -Infinity;
+    for (i = 0; i < arguments.length; i++) {
+        if (arguments[i] > max) {
+            max = arguments[i];
+        }
+    }
+    return max;
+}
+```
+
+
+# JS DOM operations 
+
+
+all HTML elements are defined as objects 
+
+
+document.getElementByID("demo").innerHTML = "a";
+
+finding HTML elements:
+
+document.getElementsByTagName()
+document.getElementsByClassName()
+
+element.innterHTML
+element.attribute
+element.setAttribute(attribute,value)
+element.style.property = new style 
+
+document.createElement()
+document.removeChild()
+document.appendChild()
+document.replaceChild(element)
+
+document.getElementById(id).onclick = function(){code}
+
+var x = document.querySelectorAll("p.intro");
+
+document.write(Date());//don;t do it real 
+
+document.getElementbyId("image").src = ...
+
+html style 
+
+style.visibility = 'hidden' or 'visible'
+
+## Animation
+
+gradual changes in an element
+
+var id = setInterval(frame,5);
+
+function frame(){
+    if(finished){
+        clearInterval(id);
+    }else{
+
+    }
+}
+
+## Events 
+
+onload/onunload
+
+onchange
+
+onmouseover/onmouseout
+
+onmousedown, onmouseup and onclick Events
+
+addEventListener 
+
+document.getElementByID("myBtn").addEventListener("click",displayDate);
+
+addEventListener() method attaches an event handler to an element without overwriting existing event handlers.
+
+removeEventListener()
+
+element.addEventlistener(event,function,useCapture)
+
+whether use event bubblign or event capturing (optional)
+
+Event propagation is a way of defining the element order when an event occurs. If you have a <p> element inside a <div> element, and the user clicks on the <p> element, which element's "click" event should be handled first?
+
+to handle first or last for nested elements
+
+bubbling -- inner first 
+
+capturing out handled first 
+
+default is false i.e bubbling propagation 
+
+parentNode
+childNodes[nodenumber]
+firstChild
+lastChild
+nextSibling
+previousSibling
+
+function loadDoc(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if(this.readyState === 4 && this.status === 200){
+            doicument.getElementById().innerHTML = this.responseText;
+        }
+    };
+    xhttp.open("GET","ajax_info.txt",true);
+    xhttp.send();
+}
+
+xhttp.abort()
+xhttp.getAllResponseHeaders()
+xhttp.open(method, url, async, user, psw)
+
+async true = async or false 
+
+sent() for get
+send(string) for post
+
+setRequestHeader()
+
+localStorage.getItem()/setItem()
+
+obj = JSON.parse(text);
+
+JSON.stringify(obj);
+
+person["name"]
+
+person.name;
+
+
+JSON + AJAX
+
+```
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var myObj = JSON.parse(this.responseText);
+        document.getElementById("demo").innerHTML = myObj.name;
+    }
+};
+xmlhttp.open("GET", "json_demo.txt", true);
+xmlhttp.send();
+```
+
+obj.date = new Date(obj.raw);
+
+## Node JS 
+
+event emitter 
+
+var myEventHandler = function(){
+
+}
+
+var eventEmitter = new events.EventEmitter();
+
+eventEmitter.on('event',myEventHandler);
+
+eventEmitter.emit('scream');
+
+MongoDB
+
+```
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("mydb");
+  var myobj = { name: "Company Inc", address: "Highway 37" };
+  dbo.collection("customers").insertOne(myobj, function(err, res) {
+    if (err) throw err;
+    console.log("1 document inserted");
+    db.close();
+  });
+});
+```
+
+find is findOne()
+
+find(query)
+
+when sort, 1 is ascending -1 is descending 
 
