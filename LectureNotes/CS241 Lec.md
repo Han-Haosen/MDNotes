@@ -725,3 +725,120 @@ one direction
 
 
 is C a regular language?
+
+
+## Lec Oct 4
+
+Maximal Munch Algorithm
+
+Run DFA without e moves until no non error move available
+
+if in an accepting state, output found token
+
+else back up to most recent accepting state
+
+use a variable to keep tract of this input to that tpoint is next token ,
+
+output token result from here
+
+endif
+
+e move back to q0
+
+simplified maximal munch
+
+if not in an accepting state when no valid transitions
+
+don't back up ,simply ERROR
+
+ex TOkens identifier must start with letter, a-z + - as internal char
+
+must end with a letter
+
+operator ++
+
+simplified MM tries to read 1 token
+
+in practice simplified MM is good enough
+
+ex C++ before 11
+
+s -> e
+s -> (S)
+s -> ss
+
+s -> s | (S) | SS
+
+Notation => mean "derives"
+
+e finite non empty alphabet terminal symbols
+
+N a finite non-empty set of non-terminals -- variables often they called
+
+context free grammar
+
+P finite set of production rules
+
+A-> B, A belongs to N b belongs to V*
+
+S a start symbol s belongs to N
+
+ABS non terminals from N
+
+S start symbol
+
+a,b,c symobls from E
+
+w x y words from e*
+
+alpha beta thetha elements of V*
+
+RHS of production rules
+
+may contain both terminals and nonterminals
+
+a A B => a theta B
+
+a -> thetha in P RHS
+
+a =>* b means a = s0 => theta1 => theta 2 => tehta 3 ... thetaK = beta
+
+where k>= 0 0 or more steps
+
+defn L(G) = {W | S =>* w} w belongs to e*
+
+lanugage L if L = L(G) for some grammar G
+
+ex palindromes
+
+e = {a,b,c}
+
+e1 = {a,b,c,d,+,-,times,/}
+
+L1 = valid arithmetic expressions
+
+s -> a|b|c | S OP S | (S)
+
+op-> + | - | / | times
+
+e2 = {a,b,c,+,-,/,times,(,)} L2 = {arith exp over {2}}
+
+show s => * a + b : s => SOPS => a OP S => a + S => a + ****
+
+
+parse tree
+
+```
+    S
+  |   |  |
+  s   op  s
+| | |  | |
+S op S * C
+a + b
+```
+
+2 different parse trees
+
+a grammar for which some word has more than 1 distinct left most derivation /parse trees
+
+is called ambiguous
