@@ -644,7 +644,7 @@ start state
 set of accepting state
 
 
-Lec Sep 27,2018
+## Lec Sep 27,2018
 
 If I can make a DFA, can automate
 
@@ -678,3 +678,50 @@ special cases?
  New Machine e NFAs transition on epsilon
 
  one state to another state without reading
+
+
+## Lecture Oct 2
+
+L = {cab} U {strings with even # as }
+
+epsilon NFA
+
+change state without consuming an input symbol
+
+epsilon transition move on to another without input
+
+infinite loop?
+
+merging those states? complicated
+
+epsilon transition is like just one state
+
+free-pass into another state
+
+Tract: caba
+
+read epsilon not readStates
+
+e closure(S)= all states reacheable from a state in S by 0 or more E transitions
+
+states = e closure({q0})
+
+while not ECF do
+
+  ch<read()
+
+
+convert E NFA to DFA using a similar method
+
+considering e transitions
+
+states DFA are again set of states
+
+conversion can be automated
+
+Kleene theorem  reg exp => e-NFA -> DFA
+
+one direction
+
+
+is C a regular language?

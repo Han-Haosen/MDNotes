@@ -337,3 +337,31 @@ scope of qualifiers
 free variable not in the scope of quantifier
 
 for all x student(x) & likes(x,SE) => like(X,logic)
+
+
+## Lecture Oct 2 2018
+
+for all X rich(x) AND actor(x) => some Y valuable(Y) Collect(x,y)
+
+3 (!(for all x) in（X，L）=> speaks(x,Fr) ) & (for all X in (X,L) => some Y knows(x,y) ^ speaks(y,Fr) ^ in(Y,L))
+
+for all X some Y votes_for(x,y) everyone votes for someone
+
+it is not the case that someone votes for every political party
+
+!(for some X for all Y polParty(Y) => votes_for(x,y))
+
+Check PRED
+
+for all X INT some Y INT x >= Y
+
+for all P PERSON likes(p,ice_cream)
+
+exists some B flightlevel(b) > FL 290
+
+
+## Lec Oct 4
+
+if P is q(x) then P[y/x] is q(y)
+
+iff P is for all X q(y,x) then p [4/y] is forall x q(4,x)
