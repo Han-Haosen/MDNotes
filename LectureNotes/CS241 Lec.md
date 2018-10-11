@@ -842,3 +842,38 @@ a + b
 a grammar for which some word has more than 1 distinct left most derivation /parse trees
 
 is called ambiguous
+
+
+## Lec Oct 10
+
+S-> a | b | c | S OP S
+op-> + | - | * | /
+
+ambiguity
+
+why w belongs L(G)
+
+the derivation(parse tree)matters
+
+shape of parse tree describes the meaning of string wrt the grammar
+
+grammar which some word has more than 1 distinct leftmost derivation
+
+give precedence to * / over + -
+
+PM -> + | -
+TD -> * | /
+
+a + b * c
+E =< E PM T => T PM T => F PM T  => a PM T
+=> a + T => a +  T TD F =>
+
+... => a + b * c
+
+WLP4
+
+Recognizer
+
+what class of computer programs is needed to recognize a context free language
+
+DFA finite memory/states // must be finite

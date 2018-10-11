@@ -511,3 +511,18 @@ disprove some x all y w(x,y){
   false by exists_e
 }
 raa prove
+
+
+semantic tableaux
+
+some x p(x) |- !(for all x . !P(x))
+
+some x P(x)
+!!(...)
+by not not nb on 2
+for all x ! p(x)
+by exist_nb
+p(xu)
+by for all_nb on 3
+!p(xu)
+closed on 4,5
