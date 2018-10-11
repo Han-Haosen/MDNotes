@@ -365,3 +365,149 @@ exists some B flightlevel(b) > FL 290
 if P is q(x) then P[y/x] is q(y)
 
 iff P is for all X q(y,x) then p [4/y] is forall x q(4,x)
+
+## Lec Oct 11
+
+genuine variable -- any value, universal quantification yields a formula true
+
+unknown variable -- a specific but unknown value
+
+g when genuine and u when unknown
+
+exists_i
+
+for all x P(f(c),x)
+for some Y all x p(f(y),x)
+
+forall_i
+
+for every Xg {
+  P(xg/x)
+}
+forAllX . p
+
+exists_e
+
+some X . P
+
+for some xu P[xu/x]{
+  Q
+}
+Q
+
+e.g
+
+for all x P(x) => q(x)
+
+forall X p(x)
+
+prove forall X q(x)
+
+for every xg {
+  p(xq)=>Q(xq)
+  p(xq)
+  q(xq)
+}
+
+forall x q(x)
+
+for all X p(x)
+for every xq {
+  P(f(xq))
+}
+
+for all x p(f(X))
+
+for all x for all y p(x,y) => for all y for all x p(x,y)
+
+assume {
+  for every yq {
+    for every x q {
+      for all y p(xq,y)
+
+      p(xq,yq)
+    }
+    for all x p(x,yq)
+  }
+  for all y for all x p(x,y)
+}
+proves the imp by imp_i on 1-7
+
+for all x p(x,x) |- for all x exists y p(x,y)
+
+for all x p(x,x)
+
+for every xg {
+  p(xg,xg)
+
+  exists y p(xg,y) by exists_i
+}
+for all x exists y p(x,y) by for all_i on 2-4
+
+for all x p(x) => q(x), exists x. P(x) |- exists x Q(x)
+1)for all x p(x) => q(x)
+2)exists x. p(x)
+3) for some xu P(xu){
+  p(xu) => q(xu)
+  q(xu)
+  some x q(x) by exists_i on 5
+}
+for some x Q(X)
+
+some x p(x) |- not (for all x !p(x))
+
+1) some x . P(x)
+2) disprove for all x !p(x){
+  for some xu p(xu){
+    !p(xq) by forall_e on 2
+    false by not_e on 4,5
+  }
+  false by exists_e on 1,4-6
+}
+not for all x !P(x) by raa
+
+!(some x P(x)) |- for all x !P(x)
+1) premise
+for every xq{
+disprove p(xq){
+  exists x P(x) by exists_ion3
+  false not_e
+}
+!P(xq) by raa
+
+
+}
+for all x !p(x)
+
+!(for all x p(x)) |- some x !p(x)
+
+disprove !(some x !p(x)){
+  for every xq {
+    disprove !p(xq){
+      some x !P(x) by exists_i
+      false by not_e
+    }
+    p(xq)
+  }
+  for all x p(x)
+  false
+}
+some x not P(x)
+
+
+all x some y !w(x,y) |- !(some x all y w(x,y))
+
+premise
+
+disprove some x all y w(x,y){
+  some xu all y .w(xu,y){
+    some y !w(xu,y) by forall_e
+    for some yu !w(xu,yu){
+      w(xu,yu) by forall_e
+      false
+    }
+    false by exists_e
+  }
+  false by exists_e
+}
+raa prove
