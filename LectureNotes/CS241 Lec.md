@@ -877,3 +877,42 @@ Recognizer
 what class of computer programs is needed to recognize a context free language
 
 DFA finite memory/states // must be finite
+
+top down -- forward
+
+start with s figure out deriation to expand into w
+
+bottom-up
+
+start with w backward to s
+
+what rule could have produced W?
+
+start with S, apply grammar rules to get w
+
+s=>a1=>a2...=>w
+
+use stack to store intermediate ai in reverse
+
+supposed w = |- abywa -|
+
+stack s'
+read e
+not read ...
+action
+
+when top of stack is a terminal
+
+pop and match with the input
+
+when TOS is a non terminal A
+
+pop A and push a^R reverse of a
+
+where A->a is a grammar rule
+
+No brute force
+
+## Tut Oct 12 CS241
+
+Assembly instructions continue

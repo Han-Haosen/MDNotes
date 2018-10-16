@@ -526,3 +526,88 @@ p(xu)
 by for all_nb on 3
 !p(xu)
 closed on 4,5
+
+
+## Lecture OCT 16
+
+sample midterm
+
+likes(a,b)
+or likes_ice_cream(a)
+
+need to match
+
+e.g
+
+for all x,y. line(x) & line(y) & parallel(x,y) ^ !(x == y) =>
+!(exists P point of(x,p) & pointof(y,p))
+
+for all x. twoline(x) & parallel(x) & notidentical(x) => nopoints in common(x)
+
+for all x. twolines(x) & parallel(x) & notidentical(x) => !intersect(x)
+
+for all x. twolines(x) & parallel(x) => noptsincommon(x) OR allptsincommon(X)
+
+
+
+hidden premises
+
+i.e one man can't be at 2 places at the same times
+
+two constants are not the same
+
+hidden premise 1 for all x ,y,z,w 10cn(x,y,w) & 10cn x,z,w => y = z
+hidden premise 2 !(J = GS)
+for all x,y,z cc(x,y,z) => 10cn(x,y,z)
+
+disprove cc(B,GS,6){
+  5)cc(B,gs,b) => 10cn(b,gs,6) by for all_e on hp1
+  6)10cn(b,gs,6) by imp_e on 4,5
+  7)10cn(B,J,6) & ....
+}
+
+exists x. age(x) != 10
+
+prime(5)
+
+exists x. soln(x)
+
+for all x. soln(x) & soln(y) => x = y
+
+(exists x. soln(x)) & (forall x,y . soln(x) ^ soln(y) => x = y)
+
+only formalization
+
+likes(A,b) & for all x likes(A,x) => x = b
+
+lieks(A,bic) & for all x likes(X,bic) => x = alice
+
+reflexivity
+
+t=t eq_i
+
+for all x .P(x) <=> x = b
+
+|- P(b) & for all x y p(x) & p(y) => x = y
+
+for all x p(x) <=> b
+p(b) <=> b = b by forall_e on 1
+b = b by eq_i
+p(b) by iff_imp on 2,3
+
+for every xg {
+  for every yg {
+    assume p(xg) & p(yg){
+      p(xg) by and_e
+      p(yg)
+      p(xg) <=> xg = b by forall_e
+      xg = b by iff_imp
+      p(yg) <=> yg = b
+      xg = b by iff_mp
+      yg = b by iff_mp
+      xg = yg by eq_e on 11,12
+      
+
+    }
+  }
+}
