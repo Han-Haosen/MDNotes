@@ -916,3 +916,63 @@ No brute force
 ## Tut Oct 12 CS241
 
 Assembly instructions continue
+
+## Lecture Oct 16
+
+Stack and FA
+
+augmented grammar
+
+only access top FILO order
+
+balanced parenthesis
+
+context-free grammar
+
+FA + stack
+
+read input one char at a time
+
+S on the stack and apply (S) rule
+
+using the stack to count the number of opening parenthesis
+
+pop 1 off when have a matching )
+
+accept no more input stack empty
+
+Using NFA to shift between push char and match char
+
+start - b/push B  
+
+or b/match b on top of stack pop b
+
+no brute force algorithm
+
+we want a deterministic procedure
+
+can use next symbol of input look ahead to help decide
+
+what rule to follow
+
+more than 1 rule?
+
+grammar called LL(1) if each cell of the predictor table contains at most 1 entry
+
+LL(1)
+
+left to right scan of input
+
+leftmost derivation produced
+
+1 symbol of lookahead
+
+automaticall create symbol table
+
+predict(A,a) rules that apply when A is the top of stack and a is next input char
+
+{A->B | a belongs to First(B)} A->ab
+
+first(B) ~ B belongs to V* V = e OR N
+
+= {a | B => *A }
