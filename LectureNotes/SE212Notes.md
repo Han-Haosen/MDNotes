@@ -606,8 +606,21 @@ for every xg {
       xg = b by iff_mp
       yg = b by iff_mp
       xg = yg by eq_e on 11,12
-      
+
 
     }
   }
 }
+
+
+## Lecture Oct 18
+
+show following argument not valid
+
+exists x. p(x) & q(x), p(A), A = B |= q(b)
+
+premise true conclusion false
+
+domain
+
+mapping

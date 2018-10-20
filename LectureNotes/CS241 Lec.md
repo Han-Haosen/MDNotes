@@ -975,4 +975,8 @@ predict(A,a) rules that apply when A is the top of stack and a is next input cha
 
 first(B) ~ B belongs to V* V = e OR N
 
-= {a | B => *A }
+= {a | B =>
+
+## LEcture Oct 18
+
+prodict (A,a) rules that apply when A is top of stack 
