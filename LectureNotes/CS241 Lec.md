@@ -979,4 +979,218 @@ first(B) ~ B belongs to V* V = e OR N
 
 ## LEcture Oct 18
 
-prodict (A,a) rules that apply when A is top of stack 
+prodict (A,a) rules that apply when A is top of stack
+
+## Midterm Review
+
+Q5
+
+use recursion for bincoeff
+
+$1 = n $2 = k
+
+if k==0 or k == n
+return 1
+
+else return bin coeff(n -1 k -1) + bin coeff(n-1,k)
+
+bincoeff:
+
+Prologue:
+
+sw $1,-4($30)
+sw $2,-8($30)
+sw $4,-12($30)
+sw $11,-16($30)
+sw $31,-20($30)
+lis $31,
+.word 20
+sub $30,$30,$31
+lis $11
+.word 1  // $11 is 1 now
+
+base case :
+add $3,$11,$0
+beq $2,$0,end
+beq $2,$1,end
+
+call to bincoeff (n-1,k-1)//store in $4
+lis $31
+.word bincoeff
+sub $1,$1,$11
+sub $2,$2,$11
+jalr $31
+add $1,$1,$11
+add $2,$2,$11
+add $4,$3,$0
+
+call to bincoeff(n,k-1)
+lis $31
+.word bincoeff
+sub $1,$1,$11
+jalr $31
+add $1,$1,$11
+add $3,$3,$4
+
+end:
+lis $31
+word 20
+add $30,$30,$31
+lw....
+
+jr $31
+
+
+DFA
+
+NFA
+
+0,1 at least 2 0s and no 111 as a sub string
+
+-> (e,e) 0 (0,e) 0 (00,e)//2 statement for each number to track
+
+a square shaped dfa with different states and a final state of 3 or more 0s
+
+
+0,1,2,3 that contains all strings startign with 212 or ends with 03
+
+language of balanced parenthesis
+
+()()
+()()()
+(())
+
+S-> (S)S | E
+if ther exists DFA with n states that matches this language
+
+maximal munch for /*
+
+
+# Nov 6 2018
+
+# Nov 13 2018
+
+code(test) = code(expr1)
+add $5,$3,$0
+code(expr2)
+slt $6,$5,$3
+slt $7,$3,$5
+add $3,$6,$7
+
+
+code(factor) = add $3,$0,$11
+factor -> NULL
+deref: factor -> * expr
+code(factor) = code(expr)
+lw $3,0($3)
+
+
+pointer arithmatic
+
+expr1-> expr 2 + term
+
+if expr2 : int, term int ~ as before
+
+if expr2 is int* term int meaning expr2 + 4* term
+
+code(expr1 = code(expr2)
+push($3)
+code(term)
+mult $3,$4
+mflo $3
+pop($5)
+add $3,$5,$3
+
+sub instead of add
+
+if expr2 is int and term is int*
+
+assignment through pointer deref
+
+LHS addr at which to store the values
+RHS the value
+stmt-> ID BECOMES expr2 SEMI
+stmt-> STAR expr1 BECOMES expr2 SEMI lvalue
+
+code stmt = code(expr2)
+push($3)
+code(expr1)
+pop($5)
+sw $5,0($3)
+
+Address of 2 cases ID STAR expr factor -> AMP lvalue
+
+&a if expr = ID
+code(factor) = lis $3
+.word lookup ID in symbol table//offset
+add $3,$29,$3
+
+
+
+
+## Nov 20
+
+callee-save
+
+factor -> ID LPAREN arglist RPAREN
+4* num args and add to offset
+
+code(factor) = push $29
+push $31
+code expr 1
+push $3
+...
+code expr n
+push $3
+lis $5
+.word FID
+
+
+code(procedure) = sub $29,$30,$4
+push (dcls)
+push regs
+code statements
+code expr
+pop regs
+add $30,$29,$4
+jr $31
+
+
+
+optimization
+
+heuristics
+
+code for 1 + 2
+lis $3
+.word 1
+sw $3, -4($30)
+sub $30,$30,$4
+lis $3
+.word 2
+
+constant folding
+
+
+int x = 2;
+return x + x;
+
+lis $3,
+.word 2
+sw $3, -4($30)
+sub $30,$30,$4
+lw $3____($29)
+push $3
+lw $3,____($29)
+pop($5)
+add $3,$5,$3
+
+
+lis $3,
+.word 2
+sw $3,-4($30)
+sub $30,$30,$4
+lis $3
+.word 4
+
+overloading

@@ -624,3 +624,47 @@ premise true conclusion false
 domain
 
 mapping
+
+
+## Lecture Oct 23
+
+
+## Nov 13 Lecture
+
+Program Correctness
+
+
+## Nov 20 Lecture
+
+assert(p[expr/var])
+
+var := expr;
+
+assert(p)
+
+assert(p)
+
+vc verification condition
+
+if B then {
+  assert (P ^ B)
+  c
+  assert(Q)
+}
+assert(Q) if then(vc i)
+
+vc i : P ^ !B |= Q
+
+assert(P)
+
+if B then {
+  assert P ^ B
+  c1
+  assert Q
+} else {
+  assert P ^ !b
+  c2
+  assert Q
+}
+
+assert(Q)
