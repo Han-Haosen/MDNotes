@@ -265,3 +265,16 @@ Image::Image (const int w, const int h) : width(w), height(h)
 }
 
 ```
+
+```
+Bool Set::Member (const int elem) const
+{
+//...
+}
+for constant memeber function
+```
+
+A data member of a class can be defined to be static. This ensures that there will
+be exactly one copy of the member, shared by all objects of the class. 
+
+
