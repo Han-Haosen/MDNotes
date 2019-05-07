@@ -202,3 +202,66 @@ singed, unsigned
 
 declare it using ::, use using dot
 
+Destructor always same name but with ~symbol 
+
+at most one destructor 
+
+for class with pointer data 
+
+a global
+object is destroyed when program execution is completed; an automatic object is
+destroyed when its scope is left; and a dynamic object is destroyed when the
+delete operator is applied to it.
+
+friend function
+
+```
+class RealSet{
+friend void IntSet::SetToReal (RealSet&)
+}
+
+void IntSet::SetToReal (RealSet &set)
+{
+set.card = card;
+for (register i = 0; i < card; ++i)
+set.elems[i] = (float) elems[i];
+}
+
+```
+
+default argument 
+
+```
+public:
+    Point(int x = 0; int y = 0);
+```
+
+Within the body of the member function,
+one can refer to this implicit argument explicitly as this, which denotes a pointer to
+the object for which the member is invoked. 
+
+```
+Point::OffsetPt (int x, int y)
+{
+this->xVal += x; // equivalent to: xVal += x;
+this->yVal += y; // equivalent to: yVal += y;
+}
+```
+
+member initialization list
+```
+
+class Image {
+public:
+Image (const int w, const int h);
+private:
+int width;
+int height;
+ //...
+};
+Image::Image (const int w, const int h) : width(w), height(h)
+{
+//...
+}
+
+```
