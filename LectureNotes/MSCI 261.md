@@ -35,3 +35,50 @@ most essential technical skill
 
 Both Finance and Excel 
 
+## Lecture 2 
+
+Chapter 2 
+
+Time value of money 
+
+simple interest  = 10% 
+
+t | amount  | interest 
+---------|----------|---------
+ 0 | 100 | 10
+ 1 | 110 | 10
+ 2 | 120 | 
+
+
+compound interest: 
+
+got interest of interest 
+
+still 10 percent 
+
+t | amount  | interest 
+---------|----------|---------
+ 0 | 100 | 10
+ 1 | 110 | 11
+ 2 | 110(1+r) = 121 |  10
+ 3 | 100(1+r)^3
+
+ Excel functions 
+
+ FV future value 
+
+ PV present value 
+
+ NPV Net Present Value : the difference between the present value of cash inflows and the present value of cash outflows over a period of time.
+ 
+ PMT : Excel PMT function payment function calculate repayment amount on a loan 
+ 
+ NPER : Returns the number of periods for an investment based on periodic, constant payments and a constant interest rate.
+ 
+ RATE 
+
+ 100/(1+i)^N = PV of 100 in the future 
+
+ net present value 
+
+ 
