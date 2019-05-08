@@ -278,3 +278,130 @@ A data member of a class can be defined to be static. This ensures that there wi
 be exactly one copy of the member, shared by all objects of the class. 
 
 
+## Lecture 2 5/8 
+
+default constructor 
+
+parameterized constructor 
+
+input operator overload 
+
+```
+Rational P;
+Rational q {3, 5};
+cin >> p;
+cout << a << endl;
+cout << p + q << endl;
+rational Z {p, q }
+
+```
+operator + overload 
+
+operator / overload 
+
+copy constructor 
+
+Does an ADT have to be a class 
+
+No. Struct my ADT works 
+
+Initialization is guaranteed constructors destructors 
+
+enforce legal value range / can't do in C 
+
+visibility of fields 
+
+should a class always have a default constructor?
+
+No. There are cases you NEED to pass your initialization value 
+
+move constructor? 
+
+
+
+Object construction in C++ 
+
+1. Allocate Space 
+2. Initialize superclass components 
+   -- superclass will be default constructed unless told how to initialize it 
+3. initialize all fields which are objects -- default unless otherwise
+4. construct body elements 
+
+MIL is now to tell compilers what constructors to use with which value 
+
+without MIL you won't be able to default initialize the super class 
+
+why use MIL
+
+* need to if fields or superclass doesn't have a default constructor 
+
+```
+class A {
+    public:
+    A(int x) ...{ }
+}
+
+class B {
+    A a;
+    Public:
+    B(){A.setX = 5} // before constructor body runs, trys to default construct A, but doesn't exist
+}
+```
+
+* speed: if you don't initialize properly in MIL, field/superclass get default constructed, then you waste that time when you overwrite that default construction in the body. Better to do it the first time. 
+
+-- smart pointer: delete automatically 
+
+```
+//+ between rationals
+- between rationals
+- << ostream and rational 
+- >> operator >> between istream and rational 
+should these be memeber function?
+can they be?
+
+cin >> r //first argument is istream
+
+cout << r; 
+
+overloaded operators as member functions always take object itself as the first parameter 
+
+cannot support because first argument is different 
+
+
+class Rational {
+    int num_, den_;
+    public:
+        Rational(): num_{0}, den_{0} {} // member initialization list 
+        Rational(int num): num_{num},den_{1} {}
+        Rational(int num, int den): num_{num},den_{den} {}
+
+        //use default parameter values
+        easier to write:
+        Rational(int num = 0, int den = 1) num_{num}, den_{den} {}
+        //default parameters must be trailing : last n parameters after first default parameter, the after ones are default too
+        Rational(const Rational &r): num_{r.num_}, den_(r.den_) {} 
+        Rational operator + (const Rational& r ){
+            //itself is *this 
+        } //member function 
+        //first param is implicitly the rational pointed to by the this pointer 
+        // no choice of first parameter 
+}
+
+```
+
+can't take the base class, but you can take the derived class
+
+A <- B
+
+foo (B b);
+A a;
+B b;
+foo(a); //doesn't work 
+
+output and input CAN't be member functions 
+
+In general prefer non-member non-friend functions 
+
+
+
