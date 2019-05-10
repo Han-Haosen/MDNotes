@@ -1194,3 +1194,31 @@ lis $3
 .word 4
 
 overloading
+
+## Tutorial 1 
+
+Legal value 
+
+explicit Rational (int num)
+
+constructor initalizes new object to a legal value 
+
+Rational a = 4 
+
+rational n = rational {4}
+
+accessor don't change anything in your class 
+
+overloading -- same function name for variants of the same function
+
+different argument signatures
+
+non member functions 
+
+## Lecture 3
+
+copy assignment operator
+
+Rational& operator = (const Rational & object) {
+  
+}
