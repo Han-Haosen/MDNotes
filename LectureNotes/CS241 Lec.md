@@ -1219,6 +1219,58 @@ non member functions
 
 copy assignment operator
 
-Rational& operator = (const Rational & object) {
-  
+```
+Rational& operator = (const Rational & other) {
+  num = other.num_
+  den = other.den_
+  //not a constructor, no MIL 
+  return *this; 
 }
+
+```
+copy constructor 
+
+```
+Rational(const Rational & other) : num_{other.num_}, den_{other.den_}
+
+```
+
+friend Rational operator + (const Rational& lhs, const Rational& rhs){
+// no implementation here, inside class
+} // non member function, cannot access private information
+// need to use friend fucntion 
+
+outside class 
+
+Rational operator + (const Rational& lhs, const Rational & rhs) {
+ Rational p {lhs.num * rhs.den + rhs.num * lhs.den, lhs.den * rhs.den };
+ retrun p;
+}
+
+or make it a member function:
+
+Ratioanl operator+ (const Rational & rhs){
+  ...
+}
+
+r = s, Copy Assignment Operator
+s will be implicityly cast to s / 1 
+
+Rational operator+ (int x){
+  return Rational { x * den_ + num, den_}; // can do r + 7 but not 3 + r 
+} //member function, doesn't work well
+
+friend Rational operator+ (int x, const Rational &){
+}
+
+Ratioanl operator+(int x, const Rational& R){
+  //
+}
+
+ 
+Rational r {1,2}
+
+Rational p = r + 7,
+
+Rational q = 3 + r
+
