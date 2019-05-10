@@ -1274,3 +1274,41 @@ Rational p = r + 7,
 
 Rational q = 3 + r
 
+cin >> q >> p >> r;
+cout << p; 
+
+needs setters/getters or friend function
+
+friend Ostream& operator <<(ostream&, const Rational &);
+friend istream& operator >>(istream&, Rational&);
+
+OStream & operator <<(Ostream& out, const Rational& r ){
+  out << "r << r.num_... ;
+}
+
+istream& operator >> (istream & in, Rational & r){
+  return in>>r.num_ >> r.dm_;
+}
+
+
+Class Node {
+  int data_;
+  Node* next_;
+  Public:
+    Node(int data, Node* next_ = nullptr): data_ {{data}, next{next_}
+    Node(const Node& other): data{other.data}, next{
+      other.next ? new Node{*other.next} : nullptr
+    } {}
+}
+
+Node n {3, new node{ 2, new NOde{1}}},
+
+3 -> 2 -> 1 
+
+cout << n; 
+Node p {n};
+p.next -> data = 20,
+cout << p // 3, 20, 1
+cout << n // 3, 2, 1
+
+deep copy, copy a whole new linked list
