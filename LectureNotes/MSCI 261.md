@@ -81,4 +81,10 @@ t | amount  | interest
 
  net present value 
 
- 
+
+## Lecture 3 
+
+future value and present value 
+
+sum together each year's PV becomes the whole pv of the future value 
+
