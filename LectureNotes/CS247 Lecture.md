@@ -403,5 +403,207 @@ output and input CAN't be member functions
 
 In general prefer non-member non-friend functions 
 
+## Tutorial 1 
+
+Legal value 
+
+explicit Rational (int num)
+
+constructor initalizes new object to a legal value 
+
+Rational a = 4 
+
+rational n = rational {4}
+
+accessor don't change anything in your class 
+
+overloading -- same function name for variants of the same function
+
+different argument signatures
+
+non member functions 
+
+## Lecture 3
+
+copy assignment operator
+
+```
+Rational& operator = (const Rational & other) {
+  num = other.num_
+  den = other.den_
+  //not a constructor, no MIL 
+  return *this; 
+}
+
+```
+copy constructor 
+
+```
+Rational(const Rational & other) : num_{other.num_}, den_{other.den_}
+
+```
+
+friend Rational operator + (const Rational& lhs, const Rational& rhs){
+// no implementation here, inside class
+} // non member function, cannot access private information
+// need to use friend fucntion 
+
+outside class 
+
+Rational operator + (const Rational& lhs, const Rational & rhs) {
+ Rational p {lhs.num * rhs.den + rhs.num * lhs.den, lhs.den * rhs.den };
+ retrun p;
+}
+
+or make it a member function:
+
+Ratioanl operator+ (const Rational & rhs){
+  ...
+}
+
+r = s, Copy Assignment Operator
+s will be implicityly cast to s / 1 
+
+Rational operator+ (int x){
+  return Rational { x * den_ + num, den_}; // can do r + 7 but not 3 + r 
+} //member function, doesn't work well
+
+friend Rational operator+ (int x, const Rational &){
+}
+
+Ratioanl operator+(int x, const Rational& R){
+  //
+}
+
+ 
+Rational r {1,2}
+
+Rational p = r + 7,
+
+Rational q = 3 + r
+
+cin >> q >> p >> r;
+cout << p; 
+
+needs setters/getters or friend function
+
+friend Ostream& operator <<(ostream&, const Rational &);
+friend istream& operator >>(istream&, Rational&);
+
+OStream & operator <<(Ostream& out, const Rational& r ){
+  out << "r << r.num_... ;
+}
+
+istream& operator >> (istream & in, Rational & r){
+  return in>>r.num_ >> r.dm_;
+}
 
 
+Class Node {
+  int data_;
+  Node* next_;
+  Public:
+    Node(int data, Node* next_ = nullptr): data_ {{data}, next{next_}
+    Node(const Node& other): data{other.data}, next{
+      other.next ? new Node{*other.next} : nullptr
+    } {}
+}
+
+Node n {3, new node{ 2, new NOde{1}}},
+
+3 -> 2 -> 1 
+
+cout << n; 
+Node p {n};
+p.next -> data = 20,
+cout << p // 3, 20, 1
+cout << n // 3, 2, 1
+
+deep copy, copy a whole new linked list
+
+## Lecture 4 
+```
+#include <utility>
+
+Class Node {
+  int data_;
+  Node* next_;
+  Public:
+    Node(int data, Node* next_ = nullptr): data_ {{data}, next{next_}
+    Node(const Node& other): data{other.data}, next{
+      other.next ? new Node{*other.next} : nullptr
+    } {}
+    ~Node(){
+        //when object out of scope(stack) or deleted 
+        //when new, always delete 
+        delete next; // recursively called;
+    }
+    Node( Node && o) : next{o.next}, data{o.data // std::move(o.data)}{
+        o.next = nullptr;
+    } //rvalue reference, move constructor, copying an rvalue
+    Node & operator=(const node & other){ //copy assignment operator
+       Node* tmp = new Node{other};
+       data = other.data;
+       delete next; //can't fail
+       next = temp; //can't fail
+       retrun *this;
+
+       //new version
+       Node* temp{other};
+       swap(data, tmp.data);
+       swap(next, temp.next);
+       return *this;
+    } 
+
+    Node & operator = (Node && other){ //rvalue reference again
+        //need to deallocate previous next ptr 
+        using std::swap,
+        swap(data other.data);
+        swap(next, other.next);
+        return* this;
+        /*
+        data = other.data;
+        delete next;
+        next = other.next;
+        other.next = nullptr;
+        return *this;
+        */ //too long
+    }
+}
+
+Node n {3, new node{ 2, new NOde{1}}},
+
+Node foo(){
+    Node n...
+    return n;
+} // return node by value
+
+int main(){
+    Node n = foo(); // rvalues, temporary values, only exists here 
+    //return value guaranteed not to exist after this statement 
+}
+```
+
+lvalue is guaranteed to have a memory address
+
+void bar(int & x){
+    x = sss;
+}
+bar(5+3); //doesn't work
+
+can't call bar on a r value because its type is an lvalue ref, make exception if its constant
+
+The big 5 
+
+destructor 
+
+assignment operator
+
+copy constructor
+
+move constructor
+
+move assignment operator
+
+
+std::move takes in any type and returns an rvalue version of it 
