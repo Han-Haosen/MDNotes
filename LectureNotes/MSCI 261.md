@@ -88,3 +88,20 @@ future value and present value
 
 sum together each year's PV becomes the whole pv of the future value 
 
+## Lecture 4 
+
+PV type = 1 for beginning of period payments
+
+Time value of money 
+
+Loan : term?
+
+use PMT for a loan, i.e payment for a loan
+
+PMT(interest,term = years, principal of payment)
+
+use goal seek 
+
+NPV = - amount initial + cash/(1+r)^year
+
+IRR A > IRR B means preferrable: Not really 
