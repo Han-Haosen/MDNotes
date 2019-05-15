@@ -597,7 +597,7 @@ The big 5
 
 destructor 
 
-assignment operator
+copy assignment operator
 
 copy constructor
 
@@ -607,3 +607,86 @@ move assignment operator
 
 
 std::move takes in any type and returns an rvalue version of it 
+
+
+## Lecture 5 
+
+```
+Node & Node::Operator=(const Node & other){ Copy Assignment operator
+
+  delete next;
+  next = new Node {*other.next};
+  data = other.data;
+  return *this;
+}
+```
+
+new fails then dangling pointer;
+
+n = n? 
+
+Then other is the same object, so delete next would 
+
+try deep copy it would get memory error 
+
+check for self assignment 
+
+2 objects are the same when same memeory address
+
+if(this == & other) return *this;
+
+General Rule of thumb: if you have to provide a user defined definition for one of the big 5, you should for all 5.
+
+No hard rule when you need these, need to figure out when you actually write those, but at least when you have resources you need to maintain 
+
+e.g Memory, Socket, File ptr etc...
+
+when are these used ? 
+
+- Destructor, when an object goes out of scope
+- heap/dynamically allocated would be delete abc 
+- statically allocated when their life time ends, when their enclosing scope ends 
+
+Definition: static memory allocation is the allocation of memory at compile time, before the associated program is executed, unlike dynamic memory allocation or automatic memory allocation where memory is allocated as required at run time.
+
+Class A{
+  B b;
+}
+
+A &p = new A;
+
+A object pointed to by p is dynamically allocated
+
+p -> b is on the heap bits 
+
+no need to delete a->b because its lifetime is tied to 
+
+copy ctor is called 
+
+- when you construct one object with another one of the same type 
+
+- when a function receives an object param by value 
+
+- when a function returns by value 
+
+EXCEPT 
+
+- when a move constructor is defined then it is used to return by value 
+
+if the other cases use an rvalue as argument then the move ctor is used 
+
+
+Compiler provides builtin impelmentations of thse for you 
+
+copy ctor -- bytewise copies all PoD(built in types not String) fields and copy constructs all object fields 
+
+same with move constructor 
+
+copy assignment operator bytewise all PoD fields and copy assigns all object fields 
+
+define CAO you would lose builtin MAO 
+
+and vice versa 
+
+If you define a copy constructor, you lose builtin move constructor, vice versa 
+
