@@ -684,9 +684,29 @@ same with move constructor
 
 copy assignment operator bytewise all PoD fields and copy assigns all object fields 
 
-define CAO you would lose builtin MAO 
+define CAO you would lose builtin MAO, just one way
 
-and vice versa 
+If you define a copy constructor, you lose builtin move constructor , one way
 
-If you define a copy constructor, you lose builtin move constructor, vice versa 
+### ADT 
+
+Abstracting some complex idea of data 
+
+enforce rules on that data e.g a valid range of values 
+
+Node n {3, new node{2, nullptr}}{
+  Node p{4, &n}
+}
+
+P goes out of scope, p's destructor runs, calls delete on its next pointer, a statistically allocated address 
+
+can't call delete on stack allocated address 
+
+we have some rules that must hold for our ADT to work properly 
+
+Assumptions are claled invariants - properties that must hold true for code to work properly 
+
+Client Code writer CANNOT be trusted to uphold your invariants 
+
+Don't expect clients to remember the rules 
 
