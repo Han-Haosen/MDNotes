@@ -105,3 +105,53 @@ use goal seek
 NPV = - amount initial + cash/(1+r)^year
 
 IRR A > IRR B means preferrable: Not really 
+
+## Lecture 5 
+
+IRR interdependent project 
+
+Cash Flow 
+
+
+Column A | Column B | Column C
+---------|----------|---------
+ -2500 | -1000 | C1
+ 150 | 500 | C2
+ 2000 | 570 | C3
+ 5000 | 750 | 
+
+ IRR = ?
+
+ Crossover point IRRa = IRRb
+  
+compute IRR of differentail cash flows 
+
+NPV rule with differnt life spans 
+
+EAC 
+
+a constant future cash flow whose present value is equal to the NPV of the project 
+
+CF0 + NPV(...)
+
+for IRR, the IRR difference is when discount rate changes to such that one is better than the other 
+
+EAC = -PMT()
+
+NPV = C5 + NPV(...)
+
+### Loan
+
+Interest only loan : principal repaid at the end of terminal 
+
+equal amortization term loan: each period, equal amount of loan principle. Interest in each period is the paid on the outstanding principal at beginnign of period 
+
+Term Loan: mortgage loan, equal payments are paid in every period. 
+
+break down of payments between interest and repayment of principal varies by period 
+
+Amortization table 
+
+Loan Balance at begin | Interest payment = r* A | principal repayment | Total payment = B + C | Loan Principal Balance at end of year = A - C | 
+
+
