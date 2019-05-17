@@ -155,3 +155,15 @@ Amortization table
 Loan Balance at begin | Interest payment = r* A | principal repayment | Total payment = B + C | Loan Principal Balance at end of year = A - C | 
 
 
+## Lecture 6 
+
+Loans and Amortization tables
+
+100000 = PMT/(1+r)^year
+
+PMT converts PV of mortage to A(annuity) equal payments
+
+after 3 years interval -- renegotiate
+
+leverage & returns 
+
