@@ -775,3 +775,114 @@ MIL
 references and const members cannot be initialized outside the initialization list 
 
 Any object not initialized in MIL will have its default constructor called 
+
+
+## Lecture 6 
+
+Invariants - Assumptions that must hold true for our code to work properly, hard/impossible to reason about code without them. 
+
+```
+Class Node{
+  int data;
+  Node *next;
+  Public:
+    Node(int d, Node* next){
+
+    } -- no cycles 
+    ~NOde(){delete next;}
+}
+```
+
+Each next pointer must point at a valid heap allocated node, or the null ptr
+
+Node assumes ownership of the next pointer 
+
+Must be able to delete it 
+
+No cycles, No sharing of next pointers 
+
+curretnly in constructor they can do whatever they want to the Node* next parameter 
+
+can't guarantee client behavior 
+
+Allowing the client to use this constructor is dangerous, as allowing them to see Node or linked list at all is represnetation exposure 
+
+The ADT we want to give to the client is a list : they should not have to care about the implementation 
+
+it is a linked list of nodes here, but they don't need to care 
+
+- what we want is to encapsulate the implementation logic, hide it away from client 
+
+Give the client a list class 
+
+//list.h 
+```
+class List {
+  class Node { // private nested class 
+    //same implementation
+    friend class List;
+  }
+  Node *head;
+  Public: 
+    List()head{nullptr}{}
+    List& push(int data);
+    // big 5 for list, reusing Node code
+    int& ith(size_t i);
+}
+```
+//list.cc 
+
+header file, i.e interface file  for .h 
+
+.cc implmenetation, seperate compilation 
+```
+List::Node::Node(int data, Node* next) //how you use private nested class 
+List& List::push(int data){
+  head = new Node{data, head};
+  return *this;
+}
+int & List::ith(size_t i){
+  Node* Node = head;
+  while(i > 0 && node){
+    --i;
+    node = node->next;
+  }
+  return node->data;
+}
+```
+Client code:
+
+```
+#include<iostream>
+using namespace std;
+
+list l;
+size_t en;
+for(size_t i = 0;i < len; ++i){
+  cout<< l.ith(i) <<endl;
+}  // O(N^2)
+```
+
+- ith is O(n) and it's bad 
+- don't have to call ith everytime they want to iterate through it 
+- give the user a similar way to iterate over their list as they did before without exposing the representation 
+
+what we want is an iterator 
+
+Client code:
+
+```
+List l ;
+for (thing = beginning of list, thing  != end of list; ++ thing){
+  *thing = *thing + i;
+  cout << *thing;
+}
+```
+
+For iterator:
+- get beginning of the list : iterator list::begin()
+- get end of the list : iterator list::end()
+- ++ work on the iterator 
+- iterator::operator++()
+- dereference operator iterator::operator*()
+- inequality/equality operator between iterators
