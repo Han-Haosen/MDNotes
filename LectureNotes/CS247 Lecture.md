@@ -710,3 +710,68 @@ Client Code writer CANNOT be trusted to uphold your invariants
 
 Don't expect clients to remember the rules 
 
+## Tutorial 2 
+
+Inheritance 
+
+Polymorphism 
+derived class that public inherits from a base calss, 
+
+use base class pointers to point to objects of derived type
+
+access things that doesn't exist in the base class is wrong 
+
+static binding:
+
+By Default: binding of functions occurs at compile time
+
+if call a member function from a polymorphic base class pointer, 
+
+function called will be the base class implementation 
+
+regardless of the actual object pointed to 
+
+Virtual functions: dynamic binding, so it will find the actual class of the object pointed to. 
+
+```
+class Bear : public Animal{
+
+}
+
+```
+
+Functions with multiple definitions 
+
+Overriding, overloading 
+
+Overriding: subclass with the same name function compared to super class 
+
+member objects : initialized using member's default constructors 
+
+inherited objects: initialized using base class default constructor 
+
+Copy Constructor 
+
+Node::Node(const Node & other){
+  data(other.data),
+  next(other.next ? )
+}
+
+copy and swap idiom 
+
+avoid code duplication 
+
+Assignment operator may be implemented by creating a new object of the same type with the copy constructor then swapping the old values of the obejct 
+
+use std::swap 
+
+Move: argument is rvalue reference
+
+and resource in the argument is stealed to the object created or assigned 
+
+
+MIL 
+
+references and const members cannot be initialized outside the initialization list 
+
+Any object not initialized in MIL will have its default constructor called 
