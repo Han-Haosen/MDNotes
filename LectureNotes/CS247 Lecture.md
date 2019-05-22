@@ -886,3 +886,111 @@ For iterator:
 - iterator::operator++()
 - dereference operator iterator::operator*()
 - inequality/equality operator between iterators
+
+
+## Lecture May 22 
+
+Office hour wednesday 3:30 - 5 
+
+DC2128 
+
+for(iterator = beginning; iterator != end of list; ++iterator){
+  cout << *iterator << "";
+  *iterator = *iterator + 1;
+}
+
+begin - in list, creates an iterator to beginning of collection 
+
+end - in list, creates an iterator to end of collection, one pass the end, since iterator != end, doesn't print it 
+
+Operator != for iterators 
+
+Operator ++ for iterators 
+
+Unary * operator for iterators 
+
+```
+class List {
+  Node* head;
+  Public:
+    class Iterator{
+      Node * cur;
+      Iteraotr(Node*);
+      public:
+        bool operator != (const Iterator&);
+        Iterator& operator++();
+        Int& operator*();
+        friend class List;
+    }
+  Iterator begin();
+  Iterator end();
+}
+
+//list.cc 
+
+List::Iterator List::begin(){
+  return Iterator{head};
+}
+
+List::Iterator List::end(){
+  return Iterator{nullptr};
+}
+
+List::Iterator:Iterator(Node* n):cw{n}{}
+
+bool List::Iterator::operator != (const List::Iterator & other){
+  return cur != other.cur //are they pointing to the exact same location?
+}
+
+reverse iterators are different things than this iterator, so no -- 
+
+List::Iterator& List::Iterator::operator++(){ //for post index then add a integer parameter, this is prefix so no int parameter
+//post fixed returns the old value
+//preferred prefix
+cur = cur->next;
+return *this;
+}
+```
+
+int& List::operator*(){
+  return cur->data
+}
+
+List l:
+for(List::Iterator it = l.begin();it != l.end(); ++it){
+  cout << *it << ";
+  *it = *it + 1;
+}
+
+for(auto it = l.begin(); it != l.end(); ++it ){
+  same as before, compiler deduces type of it 
+  
+}//only if it's unambiguous 
+
+The iterator pattern, first design pattern
+
+Iterator Pattern is a common solution to a common problem 
+
+Not necessarily exactly solution 
+
+"This is not exactly the code you should write" but "give a problem like x, maybe y or something like it is a good solution"
+
+C++ has specific syntax for classes that implement the iterator pattern 
+
+Range for loop
+for(auto& x : l){
+  cout << x  << endl
+}
+
+To use a range for loop on a class x, there must be a function x::begin(), that returns a Y 
+
+x::end() that returns a Y 
+
+overloaded operator++ for Y 
+
+overloaded operator:= for Y 
+
+overload operator* unary for Y 
+
+Specific pattern
+
