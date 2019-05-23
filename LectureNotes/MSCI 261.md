@@ -167,3 +167,31 @@ after 3 years interval -- renegotiate
 
 leverage & returns 
 
+
+## Lectuer 7
+
+PMT function 
+
+total payment and principal payment is difference between total and interest payment 
+
+In Canada, mortgage payment is always the same each period. Amount of principal paid increases as time passes, amount of interest paid gets less 
+
+PMT()
+
+IPMT()
+
+PPMT()
+
+loan balance at end of year 
+
+30% down payment 
+
+5% down payment
+
+charges annual interest on a monthly basis so loan shark actually compounds it faster 
+
+effective annual interest rate EAIR 
+
+= IRR(differential cash flow )
+
+= - PMT(0.05/12,25*12,PV)
