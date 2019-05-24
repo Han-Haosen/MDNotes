@@ -994,3 +994,140 @@ overload operator* unary for Y
 
 Specific pattern
 
+
+
+## Lecture 7 
+
+Entity ADTs and value ADTs
+
+Entity 
+
+- ADT that reflects an entity in the real world hence the name 
+- We should not allow copying, either via constructor or assignment operator, typically, because it doesn't make sense 
+- if necessary, can implement a clone method 
+
+think twice before overloading operators for them 
+
+except move assignment and if necssary copy assignment 
+
+prefer to avoid implmeneting type conversion functions 
+
+Value ADT 
+
+just represent some sort of value, like measurement value etc 
+
+Allow copying since it's just a value 
+
+typically disallow mutation of individual fields 
+
+allow overloaded operators as necessary 
+
+example of entity ADTs 
+
+-people, planes,available runways, bookings etc ...
+
+example of value ADTs,
+
+Rationals, List, units of measurement, points, forces etc...
+
+Birthdate 
+
+making a card game for example, 
+
+Deck - entity 
+
+Card - entity, actual physical card 
+
+Suit - value, it represents an attribute of a card, no actual physical suit 
+
+Player - entity 
+
+Score - value 
+
+
+License Plate ADT
+
+3 letters follows by a hyphon and then 3 numbers 
+
+4 letters followed by a hyphon and then 3 numbers 
+
+vanity plate, one with 8 or less characters or numbers mininum 2 
+
+Default constructor generate the next available plate 
+
+parameterized constructor, take in string for vanity plate 
+
+operator < for sorting inclusion in sorted containers 
+
+Make assumptions for default constructors 
+
+plates are always issued in order 
+
+vanity plates may not take the place of a non vanity plate 
+
+when we create a license plate, we need some information about all the license plates created before 
+
+we need some kind of state that is maintained not just within the life time of an object, but across the entirety of that class
+
+static variable of a class 
+
+static with regards to members of class, when applied, means that member is tied not to an individual object, but the class as a whole 
+
+a static member variable is essentially a global variable 
+
+All objects share the same variable 
+
+static member functions are also meant to be part of the class as a whole
+
+take no *this pointer, can't access anything in class besides static members 
+```
+Class Foo {
+  int x;
+  public:
+    static int count; //can't initialize it to 0 inside declaration 
+    Foo(int x): x{x} {
+      ++ count;
+    } //if you initialize with count = 0, then it will try to reinitialize count which already exists
+    Static void printCount(){
+      std::cout << count << std::endl;
+    }
+}
+```
+
+```
+//foo.cc 
+int Foo::count = 0; // define it here 
+
+int main(){
+  Foo f{5}; 
+  Foo f{2};
+  cout << f.count << "  " f2.count << endl; //both should be 2 
+  cout << Foo::count << endl //2 as well
+  Foo f3{7};
+  f.printCount(); 
+  Foo::printCount();//tied to classes, and that's why you can't access stuff like f.number in static functions 
+}
+
+definition and declaration 
+```
+
+declare it as many time as you want, define once 
+```
+Class Foo;
+
+Class Foo{
+  //actual 
+}
+```
+
+```
+class LicensePlate {
+  static std::String nextAvailable;
+  std::string plateNo;
+  static void updateAvailable();
+  public:
+  LicensePlate();
+  LicensePlate(std::string);
+  bool operator < (const LIcensePlate & other);
+}
+```
