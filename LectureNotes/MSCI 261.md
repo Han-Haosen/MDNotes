@@ -195,3 +195,12 @@ effective annual interest rate EAIR
 = IRR(differential cash flow )
 
 = - PMT(0.05/12,25*12,PV)
+
+
+## lecture 
+
+
+Effective annual rate = 
+
+(1 + r/m)^12 - 1 
+
