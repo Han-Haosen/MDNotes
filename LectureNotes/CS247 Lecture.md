@@ -1131,3 +1131,220 @@ class LicensePlate {
   bool operator < (const LIcensePlate & other);
 }
 ```
+
+
+## Lecture 8
+
+license plate 
+
+
+header file can be included twice, but you can only define something once. 
+
+Don't wanna repeat yourself here
+
+like 
+
+```
+//a.h 
+#include "b.h"
+
+//c.h
+#include "a.h"
+#include "b.h"
+
+
+
+```
+
+license.h
+
+```
+#ifndef LICENSE_H //header guard
+#define LICENSE_H
+#include <string>
+
+class LicesnePlate{
+    static int fourDigits;
+    static char charOne,charTwo,charThree;
+    static void updateNextAvailable();
+    std::string plateNo;
+  public:
+    Licesne();
+    Licesne(std::string name);
+    bool operator <(const LicensePlate &other) const; //rhs is const, lhs is const too;
+}
+
+#endif
+
+
+```
+
+
+license.cc 
+
+why not put namespace std in header file?
+
+it would pollute the global namespace: it would pull in everything in that namespace 
+
+do not have a using directive in the header file 
+
+
+
+```
+#include "license.h"
+#include <string> 
+#include <iomanip>
+#include <sstream>
+using namespace std;
+
+int License::Plate::nextAvailable = 0;
+char LicensePlate::charOne = 'A';
+char LicensePlate::charTwo = 'A';
+char LicensePlate::charThree = 'A';
+void LicensePlate::updateNextAvailable(){
+  if(fourDigits < 9999){
+    ++fourDigits;
+    return;
+  }else if(charThree == 'Z'){
+    if(charTwo == 'Z'){
+      ++charOne;
+      charThree = charTwo = 'A';
+    } else{
+      ++charTwo;
+      charThree = 'A';
+    }
+  }
+  charThree++;
+}
+
+//stringstream class
+
+setw() //set width, but with white space
+setFill() //set the filled charater
+
+
+LicensePlate::LicensePlate(){
+  stringstream ss;
+  stringstrema charStream:
+  ss << setfill('0') << setw(4);
+  ss << fourDigits;
+  charSteram << charOne << charTwo << charThree << "-";
+  string numberString;
+  ss >> numberString;
+  ...
+}
+
+LicensePlate::LIcensePlate(string plateNo):plateNo{plateNo} {}
+
+bool licensePalte::operator<(const LicensePLate &other) const{
+  return *this < other;
+}
+```
+
+always g++ -std=c++14 -c 
+
+
+## Lecture May 29th 
+
+Code see above 
+
+```
+int main(){
+  LicensePlate p1;
+  string vanity;
+  cin >> vanity;
+  LicensePLate p2{vanity};
+  LicensePlate p3;
+}
+
+```
+
+create the copy constructors as private functions 
+
+LicensePlate(const LicensePlate &) = delete; in header file, means delete builtin constructor 
+same thing with assignment operator
+
+this would cause an error message 
+
+Wrote your class but no main to test it 
+
+at least compile the classes 
+
+g++ -std=c++14 -c myfile.cc //-c compile only don't link my code yet 
+
+myfile.cc -> myfile.o 
+
+very important as we need it for seperate compilation 
+
+g++ -std=c++14 -c license.cc -> produced license.o
+g++ -std=c++14 -c main.cc ->produced main.o
+
+g++ license.o main.o -o myprogram // then link together to my program
+
+what happens if I change main.cc ?
+
+- First example, only need to run linking again, don't need to compile license.cc again 
+
+what if license.h changes?
+
+recompile every .cc module that has a true compilation dependency with license.h 
+
+if something has a true compilation dependency, means it says include "x.h"
+
+now it doesn't mean if you include then it's true compilation dependency 
+
+when does a true compilation dependency exist? when the compiler needs to know of the contents of the .h file when compiling the cc module 
+
+you use functions declared in classes in that module, specifically member functions 
+
+OR you construct and allocates object of that type , as you need at least how large an object is for a compiler 
+
+if you don't have a true compilation dependency, don't introduce one by including files, just forward declare 
+
+```
+a.h 
+
+class A{
+
+}
+
+b.h 
+
+class B{
+  A* a;  forward declaration is enough, not an actual object but a pointer 
+}
+
+c.h 
+
+class C{
+  A a; true compilation dependency because you need to know how big A is 
+}
+
+d.h 
+
+class D{
+  A& a; no 
+}
+
+e.h 
+
+class E: public A{
+  //need to include a.h 
+}
+
+f.h
+
+class F{
+  A myFn(A a); //no, because you don't use functions declared here in the header file 
+}
+
+```
+
+should forward declare as much as possible;
+
+include only when necessary 
+
+together we'll call a .h file, interface file, and it's corresponding .cc file, implementation file
+
+those are a module 
+
