@@ -1348,3 +1348,48 @@ together we'll call a .h file, interface file, and it's corresponding .cc file, 
 
 those are a module 
 
+we want to break our programs up into small distinct reusable modules 
+
+- this means our program will be split up into many files that we need to compile and link
+
+This would make compiling and linking a big task for the programmer 
+
+we use tool called makefiles 
+
+make files specify how to compile your programs
+
+g++ -std=c++14 *.cc -o myProgram //compile everything 
+
+so make file comes in here
+
+```
+destination: a.o, main.o etc.o 
+    g++ -5 -std=c++14 a.o b.o... -o my //it's a tab character here 
+
+a.o: list.cc list.h node.h
+  g++ ...
+```
+
+makefile keeps track of dependencies 
+
+.PHONY: clean
+
+clean: 
+  rm *.o myprogram
+
+it removes the .o files 
+
+
+make will default create the first target
+```
+abc = g++ -5
+flags = -std=c++14 -Wall
+
+then use 
+
+${abc} in makefile 
+
+
+-include ${Depends}
+
+```

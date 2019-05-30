@@ -204,3 +204,17 @@ Effective annual rate =
 
 (1 + r/m)^12 - 1 
 
+## lecture 
+
+Tax purpose treated as one entity for one company 
+
+car depreciated 
+
+depreciation - FAKE 
+
+CRA allow you to claim it 
+
+nobody can protect you from depreciation unless it's government 
+
+depreciation is a tax sheild 
+
