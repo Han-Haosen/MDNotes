@@ -1393,3 +1393,123 @@ ${abc} in makefile
 -include ${Depends}
 
 ```
+
+
+## lecture May 31
+
+virtual functions 
+
+struct book with int typeflag 0
+comic with typeflag 1 
+text with typeflag 2 
+
+isItHeavy 
+int isItHeavy(void* bp){
+  int *ip = int* bp;
+  if(!*ip){
+    retrun ...;
+  }
+}
+
+
+need to add different typeflags and else if to check new types
+```
+book.h
+class Book{
+  int numPages;
+  std::string title, author;
+  public:
+  Book(int numPages,std::string title, std:;string author);
+  virtual bool isItHeavy();
+}
+
+comic.h
+
+class Comic: public Book{
+  std::string hero;
+  public:
+  comic(int numPages, std::string title, std::string author, std::string hero);
+  bool isItHeavy() final override; //final means derived classes cannot override the behavior
+}
+
+```
+
+override tells the compiler you mean to be overriding a virtual function in one of your base classes 
+
+compiler makes sure you don't make a mistake 
+
+compiler will then produce an error if its not actually overriding 
+
+Book* bp = new Comic(...);
+
+cout << pb-> isItHeavy() ;
+
+so you will type it wrong but still copmpile because not the same definition 
+
+override would realize it's not an override;
+
+```
+book::Book(int numPages, sring title, string author): mil initialize it;
+
+bool Book:isItHeavy() {
+  return numPages > 200;
+}
+
+
+//comic.cc
+
+comic::comic(in  numpages...): mil {};
+
+Book{a,b,c}, Hero{hero};
+```
+
+numPages, title, author are all private fields of book, can't change them. Must change through book functions;
+
+steps of object creation: spaces allocated, superclass components are constructed, fields are initialized, which includes fields that are objects, and then constructor body runs 
+
+no default constructor for a book so you cannot default construct the object;
+
+no specification of how to construct book component in MIL means this tries to default construct it but book has no default constructors 
+
+this applies to fields that cannot be left uninitialized;
+
+
+```
+int Book::getNumPages(){ 
+  return numPages;
+}
+
+bool Comic::isItHeavy(){
+  return getNumPages() > 5o;
+}
+
+```
+
+```
+Book* pc = new Comic(.);
+
+Book* pe = new Text(...);
+
+cout << pb->isItHeavy(); //virtual dispatch
+
+```
+
+```
+
+int main(int argc, char* argv){
+  string whatTomae{argv[1]};
+  book * pb;
+  if(whatToMake == "a"){pb = new book{150}};
+
+  pb->isItHeavy(); will be depending on the actual object;
+}
+```
+
+virtual function causes the size to be different;
+
+classes with virtual functions, the compiler will store an extra pointer in those objects;
+
+that pointer is what allows the compiler to do virtual dispatch;
+
+This pointer is called virtual function table pointer;
+
