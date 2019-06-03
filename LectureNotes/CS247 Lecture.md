@@ -1513,3 +1513,133 @@ that pointer is what allows the compiler to do virtual dispatch;
 
 This pointer is called virtual function table pointer;
 
+
+## Lecture June 3rd 
+
+'''
+class BoolExpression{
+  public:
+    virtual bool evaluate() = 0;//interpret interface that all bool expression provide 
+    // declares = 0 means this is pure virtual i.e it has no implementation here;
+    //pure virtual can have implementation but still declared as 0;
+    virtual ~BExp(){}
+}
+
+'''
+
+A class with at least one pure virtual function is called an abstract class 
+
+you cannot instantiate objects of an abstract class type 
+
+BoolExpression biX
+
+if you can't create objects of this class, what to do about it?
+
+it used as the base class in a hierarchy to define the interface 
+
+so when we talk about abstract classes we talk about abstract base classes/or ABCs 
+
+
+```
+class BinaryOp: public BoolExpression {
+  BoolExpression *lhs, *rhs;
+  std::string OP;
+  public:
+    BinaryOP(BExp* lhs, BExp *rhs, std::string op): lhs{lhs}, rhs{rhs}, op{op}{}
+    ~binaryOP(){
+      delete lhs;
+      delete rhs;
+    }
+    bool evaluate(){
+      if(op == '&') return lhs->evaluate() && rhs->evaluate();
+      else if()...
+    }
+}
+
+class negOp: public BoolExpression {
+  BExp *child;
+  public:
+    negOP(Bexp* child): child{child}{}
+    bool evaluate() {
+      return ! child -> evaluate();
+    }
+    ~negOp{
+      delete child;
+    }
+}
+
+class Atom: public Bexp{
+  bool val;
+  public:
+  Atom(bool b): val{b}{}
+  bool evaluate(){
+    return val;
+  }
+}
+
+int main() {
+  BExp*b = new BinP{}
+}
+```
+
+when you delete the b, it will call the right destructor with virtual
+
+when iinheritance is involved, destructors should always be virtual 
+
+for phases of object destruction 
+
+1.Destructor body runs
+fields that are objects get destroyed 
+superclass componenet gets destroyed
+spaces deallocated 
+
+
+recall our book hierarchy 
+
+book Comic: public book, text: public BOok
+
+Book &operator =(const Book& other){
+  numPages = other.numPages;
+  title....
+  return *this;
+}
+
+comic &operator=(const comic & other){
+  Book::operator=(other);
+  hero = other.hero;
+  return *this;
+}
+
+similarly text 
+
+
+however
+
+```
+Book *b = new book
+Book *c = new Comic
+*c = *b;
+calls book's assignment op, only assigns book fields 
+
+```
+
+class Book{
+  virtual BOok& operator=;;
+}
+
+class Comic{
+  comic & operator = (const comic&) override; //compilation error, not a valid override, because no match of function in base class
+
+  needs to be 
+
+  comic & operator = (const Book &) override{
+
+  }
+}
+
+if CAO is non virtual then assignment thorugh base class pointers only does the base class assignment i.e partial assignment;
+
+you should only be assigning between same classes 
+
+if virtual then parameter has to be a base class reference and you get mixed assignment;
+
