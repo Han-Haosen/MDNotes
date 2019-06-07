@@ -1643,3 +1643,104 @@ you should only be assigning between same classes
 
 if virtual then parameter has to be a base class reference and you get mixed assignment;
 
+## lecture June 5 
+
+Assignment through bas class pointers is generally a bad idea.So instead like to disallow assignment thorugh base class pointers 
+
+make book Assignmnet operator protected but user can't assign books
+
+All base classes should be abstract 
+
+instead of having comic and text inheriting from book
+
+want abstract book and then 3 sub classes book, comic and text;
+```
+class AbstractBook {
+  int numPages;
+  std:;string title, author;
+Protected:
+  AbstractBook &operator =(const AbstractBook & other){
+    numPages = other.numPages;
+    title = ...
+    author = ...
+  }
+  public:
+    virtual ~AbstractBook() = 0; //with at least one pure virtual is an abstract class
+}
+
+Abstract Book.cc 
+AbstractBook :~AbstractBook(){}
+
+can't instantiate abstract book 
+```
+
+```
+class ChessBoard{
+  char** board;
+  public:
+  ChessBoard();
+  void printBoard();
+  void playTurn(string s);
+}
+
+void ChessBoard::printBOard(){
+  for(y = 0; y < height; ++y){
+    for(x = 0;x < width;++x){
+      cout<<
+    }
+  }
+}
+
+```
+
+what if I want to display my Chessboard another way? maybe another stream not cout?
+
+can't do that here.
+
+make the function take in a stream, but you want to display it graphically 
+
+chessBoard shouldn't be talking to the user at all, it should have only one reason to change - game Logic/ state
+
+& display are the 2 reasons 
+
+single responsibility principle 
+
+a class should have only one reason to change 
+
+separate display from our model(data)
+
+Observer pattern 
+
+-subjects - represent our data or the thing our observer is interested in -- keeps track of the observers 
+
+and notifies them when its state changes
+
+observers -- interested in the subjects, react appropriately to notifications of changes in them 
+```
+class Subject {
+  vector<Observer *> obs;
+  public:
+  void attach(observer *o){
+    obs.emplace_back(o);
+  }
+  void detach(observer *o){
+    for(auto it = obs.begin();it != end()...){
+      if(*it == o){
+        obs.erase(it);
+        return;
+      }
+    }
+  }
+}
+
+void notifyObservers(){
+  for( ob: obs ){
+    ob->notify;
+  }
+}
+virtual ~subject = 0;{
+  
+}
+```
+
+life period of those pointers are NOT owned by the subject 

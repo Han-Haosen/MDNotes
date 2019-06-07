@@ -218,3 +218,21 @@ nobody can protect you from depreciation unless it's government
 
 depreciation is a tax sheild 
 
+## lecture 
+
+Portfolio 
+
+your collection of investments i.e stocks bonds treasury bills etc 
+
+most cases when it says portfolio it means your collection of stocks
+
+Apple today tomorrow 182.11 vs 190 
+
+change in price is called return on stock A
+
+p t+1 / pt - 1 = % return 
+
+weighted mean 
+
+weighted mean of expected return = 3/10(0.25) + 7/10(0.01)
+
