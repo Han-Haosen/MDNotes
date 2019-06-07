@@ -1744,3 +1744,120 @@ virtual ~subject = 0;{
 ```
 
 life period of those pointers are NOT owned by the subject 
+
+
+## Lecture June 7th
+
+```
+class Subject {
+  vector<Observer *> obs;
+  public:
+  void attach(observer *o){
+    obs.emplace_back(o);
+  }
+  void detach(observer *o){
+    for(auto it = obs.begin();it != end()...){
+      if(*it == o){
+        obs.erase(it);
+        return;
+      }
+    }
+  }
+}
+
+void notifyObservers(){
+  for( ob: obs ){
+    ob->notify;
+  }
+}
+virtual ~subject = 0;
+
+Class Observer{
+  Public:
+  virtual void notify = 0;
+  virtual ~observer() {}
+}
+
+each observer needs to implement function notify
+
+Class HorseRace: public Subject{
+  ifstream raceFile;
+  string lastWinner;
+  public:
+  HorseRace(string fname):raceFile{fname} {}
+  void doRace (){
+    raceFile >> lastwinner;
+    notifObservers();
+  }
+  string getState(){
+    return lastwinner;
+  }
+}
+
+class Bettor: public Observer {
+  string name, horse;
+  HorseRace *hr;
+  public:
+  void notify() override {
+    cout << name << (horse == hr->getState() ? "win" : "lose") <<endl; 
+  }
+  Bettor (string name, string horse, HorseRace *hr): name{name}, horse{horse}, hr{hr} {
+    //attach to horseRace
+    hr -> attach(this);
+  }
+  ~Bettor(){hr -> detach(this);}
+}
+```
+
+
+UML 
+
+unified modelling language
+
+how to show a class in UML
+
+```
+Foo 
+--
+//fields
+- myName : string
++ myPage: int 
+--
+//methods
++ * dothing(p :int) : void  //public virtual function, virtual functions should have italicized name
+//abstract base classes should have their names italicized 
+
+
+- is private + means public * protected 
+
+
+3 main relationships we'd like to show 
+
+one class contains references to another class but not own it, aggregation
+
+UML:
+
+A 
+diamond and a line and point to B indicates the class that contains the other class
+B 
+
+has a relationship 
+
+A has a B if B's life time not tied to A 
+
+if A dies, B lives on 
+
+A copied, B is not 
+
+we can specify multiplicities of our relationships how many
+
+add an N on the line 
+
+
+on the other side
+
+A  1          B  means b held by exactly one A 
+
+A 1..3      2 .. * B means each A has w to many B and B contained by at least 1 at most 3 As 
+```
+
