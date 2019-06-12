@@ -1861,3 +1861,25 @@ A  1          B  means b held by exactly one A
 A 1..3      2 .. * B means each A has w to many B and B contained by at least 1 at most 3 As 
 ```
 
+## lecture June 12 2019 
+
+Error handling 
+
+vector::at(size-t i) checked version of the index operator, check if it is out of bounds 
+
+error handling is inherently a non local problem 
+
+callee can detect the crror, but doesn't know what the caller wants to do about that 
+
+caller knows how it might like to handle an error, but can't detect it 
+
+in C, it uses sentinel return vals 
+
+if a fn is always meant to return a positive value, allow its return type to be signed and retain -1 on error, or distince negative values as error codes 
+
+Not ideal
+
+reduces the range of values your fn aan return 
+
+not always possible 
+
