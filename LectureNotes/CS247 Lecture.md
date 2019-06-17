@@ -1883,3 +1883,268 @@ reduces the range of values your fn aan return
 
 not always possible 
 
+like Vector(T) doesn't even konw as the person writing vector what's the type stored in it 
+
+can't choose sentinel valeus even if those are ints
+
+check on client code is not good, and they probably ignores it 
+
+C++ has exceptions , dedicated system for error passing and handling 
+
+the function that detects an error will raise/or throw an exception if it can't recover itself 
+
+either some caller down the chain will catch that exception, or the program terminates 
+
+exception in C++ is anything that is thrown
+
+typically we want to use meaningful error classes as our exceptions 
+
+to raise an exception use keyword throw
+```
+#include <except>
+
+int at(size_t i){
+  if (i > mybound){
+    string::string ss;
+    ss << "index.out of bounds";
+    throw std::out_of_reach(ss.str());
+  }
+}
+
+```
+
+std exception all take a string param in their constructor that is meant to describe what went wrong for error reporting purpose 
+```
+int foo(){
+  throw 10;
+  cout << "hi";
+}
+int Bar(){
+  foo();
+  cout << "bar";
+}
+int main calls Bar()
+```
+
+this program prints..?
+
+when an exception is thrown, the curent executing function stops and stack unwinding occurs. When a function ends its stack fram is popped off.
+
+the unwinding will propage until you catch it 
+
+try is used to denote a code block where is an exception is raised within it, then you dela with ti 
+
+as before example, except change to 
+
+``` 
+bar(){
+  try{
+    foo();
+  }
+  catch()
+  cout<< 
+}
+
+```
+
+foo 10
+
+bar call to foo in bar was wrapped with a catch block that catches ints, so that code executes, prints then the rest continues, main never sees that exception 
+
+A +x int 
+is a
+B +y int 
+is a 
+C +z int
+
+int foo(){
+  throw C{1,2,3};
+}
+
+int bar(){
+  try foo()
+  catch(A a){print a}
+  catch(B b){print b}
+  ...
+  }
+
+First matching handler is executed in this case the one for A's becasue + C is an A this prints A 
+
+## Lecture 
+```
+Struct X {
+  virtual void hi(){
+    cout<<
+  }
+}
+
+struct Y: public X{
+  virtual void hi(){
+    cout <<"y";
+  }
+}
+
+struct Z: public Y{
+  virtual void hi(){
+    cout <<"z";
+  }
+}
+void foo(){
+  throw Z;
+}
+
+int main(){
+  try{
+    foo()
+  }catch(x x){
+    x.hi();
+  }catch(y,y){
+    y.hi()
+  }
+}
+```
+
+Matches the first matching handler
+
+a Z is an x indeed, so X one matches 
+
+virtual function doesn't help here.
+
+x is a local copy of the object thrown
+
+so virtual dispatch doesn't happen 
+
+x reference or x pointer then virtual dispatch works 
+
+x objecto on stack won't because you know 
+
+General maxim in C++ is throw by value,catch by reference 
+
+if change to 
+try foo()
+catch (X &obj) {obj.hi()} 
+
+this will print Z , still first catch block, but the virtual dispatch now occurs 
+
+so when a matching handler is NOT found the exact same exception is propagated to the next function in the call chain
+
+a function can catch an exception and completely resolve it 
+
+or do some cleanup and throw a new exception 
+
+or throw the same exception 
+```
+int bar(){
+  throw z;
+}
+int foo() {
+  try {bar()};
+  catch(x& obj){
+    throw obj;
+  }
+}
+
+main(){
+  try{foo()};
+  catch(z &obj){
+    z.hi();
+  }
+}
+
+type of something thrown is a X reference 
+
+type thrown by foo is x&, an X is NOT a Z,
+
+therefore mains handler doesn't type match and the program crashes
+
+throw obj doesn't bahave because it changes the type being thrown to the type caught to rethrow the exact same thing 
+
+say throw; don't give any parameter;
+```
+
+if function has resources e.g 
+
+and an exception is thrown, guarantee those resources are freed 
+
+could wrap possibly everything in a try catch that free resource 
+
+
+guaranetee some code happens at the end of our function 
+
+## Lecture June 17
+
+need ot make sure the clean up code to run regardless of how we exit a function 
+
+key observation 
+
+stack allocated is freed on both , return or throw
+
+destructors for stack allocated objects runs 
+```
+int * genArray(int begin, int end){
+  int * arr = new int [end - begin];
+  int i = beign;
+  while(i != end){
+    array[i - begin] = i
+    ++i;
+  }
+}
+
+```
+
+wrap arrays in a stack allocated object that manages them i.e destructor frees them and this is no longer a problem 
+
+wrap all resources in stack allocated objects that manage them
+
+Resource Acquisition is Initialization 
+
+Any time you acquire a resource, like memory file pointer network sockets
+
+vector 
+```
+Node& node::operator=(const node& other){
+  if(this == &other ) return *this;
+  delete next;
+  next = new node{*other.next};
+  data = other.data;
+  return *this;
+}
+
+```
+
+if fails, left with dangling pointer
+
+exception safety 
+
+basic guarantee - if a function offers the basic guarantee, it promises that if it throws or propagates an exception then the program will be left with a valid but un specified state
+
+valid means no resource leaks, no invariants violated
+
+strong guarantee if this function would throw or propagate an exception the program state will be left as if nothing occured 
+
+no throw guarantee this fucntion will always complete its task and never throw an excpetion -- tell cmopiler with keyword no except 
+
+class Node{
+  Node& operator = (Node && other){
+    swap next other.next
+    swap data, other.data
+    return *this
+  }
+}
+
+should declare any function which doesn't throw no except, facilitates compiler optimization
+
+at the least your move operations should be no except
+
+emplace_back : if array is full allocate new larger array 
+
+copy elements from old array over
+
+place new element to the back
+
+free old array -- old values are r values 
+
+should move elements over than to copy them
+
+If we move elements over
+
