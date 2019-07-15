@@ -236,3 +236,7 @@ weighted mean
 
 weighted mean of expected return = 3/10(0.25) + 7/10(0.01)
 
+## Lecture 
+
+Stock Valuation 
+

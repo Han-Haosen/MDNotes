@@ -2148,3 +2148,536 @@ should move elements over than to copy them
 
 If we move elements over
 
+if moved then object is not valid anymore 
+
+if in the middle throw exception, then half of old array would be invalid
+
+exception just been thrown 
+
+but emplace_back offers the strong guarantee
+
+this violates strong guarantee
+
+emplace_back will use the copy constructor to keep old array in tact while creating new array
+
+unless the move constructor is declared no except
+
+class A{
+  public:
+    void foo();//strong
+    void bar();//strong guarantee
+    void bar(){ // what guarantee? if foo throws no problem but if foo() changed the program and then bar() failed, you can't offer strong guarantee
+      foo();
+      bar();
+    }
+}
+
+
+## Lecture
+
+Pointer to implement idiom 
+
+take all fields out and create an implemnetation struct that store them
+
+now your class just holds a pointer to an object of that struct type 
+
+if the creators of X window class decide to change layout of class then all client code that creates or uses xwindow objects must recompile
+
+struct XWindowimpl{
+  Display* d;
+  windows w;
+  int a b c;
+}
+
+class XWindow{
+  XWindowImpl* pImpl;
+}
+
+Now all field accesses must be changed 
+
+from 
+w to pImp->w
+d to PImp->d
+
+Now we can completely change the underlying implmentation of the class 
+
+without client code needing to recompile 
+
+and we can trivially provide a non throwing swap
+
+void swap(xWindow& lhs, xWindow& rhs){
+  swap(lhs.pImpl, rhs pImpl);//won't throw
+}
+
+client code only get interface
+
+basically no reason not to do this 
+
+of a resource should only be done thorugh initialization of a statically allocated object who manages it 
+
+we already have vectors 
+
+vector for heap allocated arrays 
+
+fstreams for file pointers 
+
+Foo* genFoo(){
+  Foo* ret = new Foo();
+  if (...) {
+    return a;
+  }else{
+    return ...
+  }
+}
+
+to follow RAII we could write a class that manages FOo* sfor us but - C++ has classes for wrapping pointers already
+
+```
+#include <memory>
+
+auto ret = make_unique<FOO>(constructor arguments);
+//if anything throws, unique pointer is popped off the stack and deletes the foo 
+
+```
+
+unique_ptr assumes SOLE ownership fo the memory it points at as unique pointer have their copy ctor and CAO deleted 
+
+return by value is using move constructor 
+
+int *p = new int ;//already violates
+unique_ptr up{p};
+```
+shared_ptr<T> 
+
+can be copied 
+
+will only delete if the last shared_pointer to that data dies
+```
+
+shared_ptr maintains a ret count of the shared pointers to that data
+
+Is when a shared_ptr is created it allocates a size_t pointer and sets unmber to one 
+
+it is the only shared pointer to that data
+
+when you copy constructor a shared_ptr then that size_t ptr is shallow copied
+
+size_t is incremented 
+
+shared_ptr decremenets shared count, if it's zero clean it 
+
+## Tutirial 
+
+catch(...) must be the last catch clause
+
+## Lecture June 21 2019
+
+Smart Pointers can be used in all the same ways raw pointer can be used
+
+if necessary you can still access the raw pointer with the get method
+
+make sure smart pointers outlive the non owning raw pointers to the same data
+
+now with smart pointers you don't need to use new except in mid terms
+
+we want to have an object hierarchy where at runtime we can mutate the behavior of the relevant functions provided by that hierarchy 
+
+
+Essentially we'd like to add and remove functionalities to objects at rune time 
+
+--Decorator pattern
+
+Pizza -- to create a piaza, order system, where the users can add things to their pizza changing the price & description
+
+Component 
+
+Pizza 
+
+price();
+description();
+
+Create and Share
+
+Price():float;
+description():string;
+
+/Decorator/ own/or has-a
+
+Inherit
+
+Concrete Decorators
+
+Topping +type: string
+prize();
+desc();
+
+Free Extras
++type:string
+desc():string
+
+```
+class Pizza{
+  virtual float prize() = 0;
+  virtual string desc() = 0;
+  virtual ~pizza{}
+}
+
+class crust and sauce: public Pizza{
+  Public:float price() override{
+    return 5.49;
+  }
+  string desc() override {
+    return "pizza";
+  }
+
+  //potential client code
+  Pizza* p = new CrustandSauce{};
+  p = new Topping{"Ham", p};//wrapping crust and sauce pointer;
+  p = new Topping{"pineapple", p}; contains the topping ham pointer
+  p = new FreeExtra{"Welld Done"};
+  delete p;
+  //pop toppings off freeing then one by one
+  using a own-a relationship for decorators
+
+}
+
+Design decision which to do we'll choose ownsership for this particular example
+
+Class decorator : public Pizzaa{
+  protected:
+  Pizza* base;
+  public:
+  Decorator(Pizza* p) base{p} {}
+   ~Pizza{delete base;}
+   string descr() override{
+     return base->desc();
+   }
+   float price() override {
+     return base->price();
+   }
+}
+
+Class CAndSace : public Pizza{
+  public :
+  float price() override {
+    ///
+  }
+  string desc() override{
+    return "pizza";
+  }
+}
+
+class Topoping: public Decorator{
+  string topping;
+  public:
+  Topping(string t, pizza* p) : Decorator{p}, topping{t}{}
+  float price() override{
+    //return 1.49 + base->price;
+    return 1.49 + Decorator::price() // if Decorator has a price function return 
+    //base-price();
+  }
+  string desc() override{
+    return 
+  }
+}
+
+class FreeExtra :public Decorator{
+  string extra;
+  public:
+  string desc() {
+    return extra + base->desc();
+  }
+}
+
+int main(){
+  pizza* p = new FreeExtra{"well done", new Topping{"basil", new Topping{"PineApple"}}}
+
+  cout << p->desc() << endl;
+  
+}
+```
+## Lecture June 24 2019
+
+decorator pattern revised 
+
+decided it's owning relationship so everything do get deleted 
+
+Remove: return child pointer or else keep recursing to child pointer
+
+the pointer returned now is a child pointer 
+
+not supposed to remove the base component 
+
+**strategy pattern**
+
+what if you have some taskes you wanna to dbt different classes achieve it differently 
+
+e.g different level difficulty CPU player AIs for chess
+
+create a virtual method e.g MakeMove and all the classes override it with their specific behavior 
+
+CPU Player 
++virtual MakeMove() void
+
+Easy CPU , Medium CPU
+
++MakeMove() void
+
+what if we want to maee sure that at the beginnign of each makeMove the CPU's regardless of difficulty check if there is a checkmate in one then need to take it 
+
+how to enforce some behavior that all classes must follow?
+
+so we could copy & paste the check for checkmate into every overriden method
+
+Real issue we casued itsthat a public virtual method is trying to be 2 things 
+
+A virtual method is a hook for our derived classes to inject specialized behavior
+
+public method is the interface to the client code
+
+A public virtual method is both
+
+The non-virtual interface Idiom or NVI states that all public methods need to be non virtual
+
+virtual behavior you want to provide to the client should be a non virtual public methods that calls one or more virtual methods
+```
+Class CPUPlayer {
+  virtual void doMOve() = 0;
+  public 
+    void MakeMove(){
+      doMove();
+    }
+    virtual ~CPUPlayer(){}
+}
+
+class EasyCPU: public CPUPlyaer{
+  void doMove() override{
+
+  }
+}
+
+```
+
+now if we want to enforce some beavior that ALWAYS occurs regardelss, place it in the non-virtual makeMove function
+
+```
+void makeMove(){
+  checkCehckMate();
+  doMove();
+}
+
+```
+
+you can override private virtual method, you can't call the parent
+
+always follow non virtual interface unless you have a very good reason not to do so
+
+a lot easier to enforce control on your public interface from the get go rather than trying to regain control later
+
+
+
+what if we're creating a video game and in thi sgame have difficulty levels 
+
+In the easy levels we mwnt more turtles than bullets with some probability 
+
+Create a virtual method CreateEnemy(), which generates enemies per the given levels policy 
+
+```
+
+Easylevel and castle both override the createEnemy method
+
+Turtle and Bullet inherit enemy
+
+```
+
+Pattern is called the factory method pattern
+
+just strategy pattern applied to a policy of object creation 
+
+
+
+## Lecture 7/2 
+
+```
+template<typename T>
+
+T max(constT& lhs, const T& rhs){
+  return lhs > rhs ? lhs : rhs;
+}
+
+Max<int>(a,b);
+
+
+Template functions do NOT Have to be explicitly parameterized when the type of the template argument is unambiguously deducable 
+
+int x = 10 y = 3;
+
+max(x,y) template is automatically parameterized with type int 
+
+template functions are incredibly useful when the abstraction you want to 
+
+classes can be templated too 
+
+consider linked list, it stores only integers now, you can say you store everything now 
+
+template<typename T>
+
+class LinkedList{
+  struct Node{
+    T data;
+    node* next;
+  }
+  Node* head;
+}
+
+class iterator{
+  Node* cur;
+  iterator(node* c)...
+  friend Class Linkedlist<T>; LinkedList is an incomplete type, must specify which type to template it with 
+  public:
+  T& operator*(){return cur->data};
+}
+
+now we can create LinkedLists over any type of data that matches the way we use it 
+
+LinkedList<string> ls;
+
+ls.addToFront("HJ") addToFront("aa");
+
+linkedList<float> lf;
+
+return type of assignment operator LinkedList<T>& 
+
+Now Linkedlist is a consideraably more powerful class, don't need new code, only return types are changed use them to your advantage 
+
+How does this all actually work?
+
+compiler generate code, it needs actual implementation 
+
+class shared_ptr{
+  T* data;
+  size_t* count;
+  ~ shared_ptr(){
+
+  }
+}
+
+Shared_ptr(T* p): data{p}, count{new size_t{1}}{}
+
+Shared_ptr<T>(const ...) : data{other.data}, count{other.count}{
+  ++(*count);
+}
+
+shared_ptr<T> (shared_ptr<T> && other): dataP{other.data}, count{other.count}{
+  
+}
+
+```
+
+## Lecture July 3 
+
+```
+template<typename T>
+
+class shared_ptr{
+  T* data;
+  size_t* count;
+  public:
+  shared_ptr<T>(T d): data{new T{j}},count{new sizet{0}}{}// actually
+  shared_ptr(T* d) data{d}, count{new size_T{0}}
+  ~shared_ptr(){
+    --(*count);
+    if(*count){
+      delete data;
+      delete count;
+    }
+  }
+  shared_ptr(const shared_ptr<T> &other): data{other.data}, count{other.count}{
+    ++{*other.count};
+  }
+  share_ptr<t> & operator=(const shared_ptr<T>& other){
+    --(*count);
+    if(*count){
+      delete data;
+      delete count;
+    }
+    data = other.data;
+    count = other.count;
+    ++(*count);
+  }
+}
+
+```
+
+what if we want the max of an arbitary list of items;
+
+we can create variable templates using what's called a parameter pack
+```
+template<typename T, typename... Rest>
+
+T my_max()(T first, Rest... rest){
+  T maxRest = mymax(rest...);//recursion
+  return first > maxRest: (first: maxRest);
+}
+
+T don't have to be the same in each recursive call
+
+auto test = my_max(5.7, 10.0, 25.5, 30)
+
+it's getting converted to a float, T returned not an int;
+
+float max_rest = my_max(20.5, 17, 30.5);
+
+everytime the compiler ses and instantiation of tatemplate it hasn't seen before, it creates a new class function with that instantiation 
+
+templates, other than types, can also have integer values 
+
+you can combined those to compiut things at compile time
+
+called template meta programming
+
+
+
+```
+
+
+```
+template <long long N>
+
+stuct fib {
+  const static long long val = Fib<N-1>::val + Fib<N-2>::val;
+}
+
+template<>
+struct Fib<1> {
+  const static long long val = 1;
+}
+
+template<>
+struct Fib<0>{
+  const static long long val = 1;
+}
+
+when output, it's a constant time function
+
+
+
+```
+
+
+## Lecture July 10 2019
+
+Single responsibility principle 
+
+preserve the behavior of its base calas 
+
+work with client code that uses the base class 
+
+LSP
+
+require no more than base class and no less
+
+signatures must match 
+
+compatible types as the parameters of the base class's methods 
+
