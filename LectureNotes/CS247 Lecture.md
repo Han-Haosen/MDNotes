@@ -2681,3 +2681,292 @@ signatures must match
 
 compatible types as the parameters of the base class's methods 
 
+## Lecture July 15 2019
+
+avoid C style casts
+
+int *p = ..
+
+void* v = void* p;
+
+book* b = (book*) v;
+
+//Nonsense
+
+In general, AVOID casting, try not to do that 
+
+if you must, use c++ style casts 
+
+4 varieties 
+
+static-cast - for sensible casts with well defined behavior 
+```
+float x = 4.SF
+
+int y = static-cast<int> x
+
+```
+casts from base class pointers to derived class pointers 
+
+Dangerous-- telling the compiler to trust you that object actually points at the derived class 
+
+reinterpret - cast
+
+for weird, uncommon or even unsafe/undefined casts 
+
+student *s = new Student("abc");
+
+Turtle *t = reinterpret_cast<Turtle*> (s);
+
+Weapon* w = new stick;
+
+w->strike(t);//thrown an error 
+
+it will read the same place as the variable 
+
+const_cast for casting away constness 
+
+only c++ style cast that you can do 
+
+should NOT be used to modify const objects
+
+using this when something doesn't modify but expects a non const thing
+
+working with a library you don't own 
+
+void doSomething(Foo* p)
+
+somewhere in your code, const Foo* p,
+
+dynamic cast is for casting pointers of references that are to a base class down to a derived class pinter or reference 
+
+attempts the cast, if the object the pointer points at is NOT actually of the type , return the nullptr, else returns the pointer given 
+```
+void whatIsIt(AbstractBook* pb){
+  if(dynamic_cast<comic *>(pb)){
+    is a comic;
+  }else if(dynamic_cast<>)..
+}
+
+you don't want a function that takes in an abstract base class and needs to know the derived classes
+
+with dynamic cast we could finally provide a polymorphic assignment operator diwallow from assigning through base class pointers 
+
+highly coupled to the book hierarchy
+
+```
+```
+class AbstractbBok{
+  string title,author;
+
+  ..
+  public:
+  virtual AbstractBook& operator=(cosnt AbstractBook& b){
+    title = b.title;
+  }
+}
+
+class Comic: public AbstractBook{
+  string hero;
+  Public:
+  Comic& operator=(const AbstractBOok& b){
+    comic &other = dynamic_cast<Comic &>(b);
+    //throws if not actually a comic
+    Book operator = (b);
+    hero = other.hero;
+    return *this;
+  }
+}
+```
+
+Dynamic cast restrictions 
+
+You need to know the actual type of object
+
+on types that have at least one virtual function -- 
+
+struct A{
+  virtual void hello(){}
+}
+
+struct B: public A{
+  void hello() override{ cout <<"Issds>>};
+} 
+
+int main() {
+  A* ap;
+}
+
+for non-virtual methods, and stand alone functions, the compiler can just generate a simple jump instruction 
+
+## Lecture 
+
+in OOP it is often the case that our classes may support a variety of interfaces 
+
+For example, consider you'are making a video game and you want an interface that specifies which objects are "drawable". 
+
+```
+class Drawable{
+  Rendeer* r;
+  public:
+  void draw(int x, int y ) = 0;
+}
+
+class controllable{
+  public:
+  void handleEvent(event& e) = 0;
+}
+
+multiple inheritance can cause issues that might be such that 
+
+A
+inherited by
+B C 
+inherited by 
+D 
+
+what happens is we do following 
+
+D obj obj.x;//ambiguous, compilation error 
+
+there is an A in both B and C so which one does it call?
+
+```
+
+virtual inheritance is the solution 
+
+class A{
+  public:i
+  ntx
+}
+
+classs B: public virtual A{
+  ...
+}
+
+class C: public virtual A{
+
+}
+
+class D: public B, publi C{
+
+}
+
+when it's done, how? only one x 
+
+before multiple inheritance, if you looked at the beginning address of an object, it looked like any of its ancestors 
+
+consider if we want to find the a fields of this object, 
+
+while it is pointed at by a B pointer
+
+D looks like this
+
+Vptr
+Bfields
+Vptr
+C fields
+D fields
+vptr
+A fields
+
+
+virtual inheritance -- won't know where field is until run time 
+
+so the distance to the A fields through a p pointer is not knowable at compile time just as it's not knowable at compile time which virtual method call
+
+## lecture 
+
+Lambdas are good for a one off cuntion, if you want a family of functions better solution
+
+```
+template <typename Iter, typenmae fn>
+
+transform(iter beg, iter fin, fn)
+
+vector<int> v {1,2,3}
+
+transform(v,begin v,end, [] (int n) {return n + 1;} )
+
+if you want same thing but add d to each element?  different n+1 when you want to do the function 
+
+you can copy and past lambda but it's stupid 
+
+what can you supply as a type func
+
+functions are callable 
+
+objects of a type which have had the function call operator overloaded //important 
+
+class Addn {
+  int n;
+  Public:
+  Addn(int n):n{n}{}
+  int operator() (int q){return q + n}
+}
+
+addn plus5{5},
+cout plus5(2) 
+
+functions with state 
+
+class IncreasingPlus{
+  int n;
+  public: 
+    int operator() (int q){return q + n ++}
+}
+
+vector<int> w {1,2,3,4}
+
+transform(w.begin(), w.end(), IncreasingPlus{1});
+
+in the <numeric> render there is a function it is name std::accumulate this function depending on its parameters implements what is known as foldr and foldl
+
+can be used to represent arbitary recursions over containers 
+
+template <typename Iter, typename T, typename Func>
+T accumulate(iter beg, iter end, T base, Func fn)
+Functions must have 2 parameters, one that takes a T and one that takes a known Type of *Iter,must return a T
+
+accumulate does 
+
+f(base, *begin)
+
+```
+
+## lecture
+
+string s{"1101"}
+
+accumulate(s.begin(), s.end(), 0, [](int n,char c){
+  return c =='1'? 2* n + 1: 2 * n;
+})//13
+
+accumulate(s.rbegin(),s.rend);//11
+
+"1 1 0 1"
+
+begin with left is called foldl
+
+begin with rbegin, is called foldr
+
+```
+
+vector<int> v{1,2,3,4};
+
+vector<int> w;
+
+for_each(v.begin(),v.end(),[&w](int n){
+  if(!(n % 2)) w.emplace(n);
+})
+copy if, but doi't move to reserve size 
+
+#include <iterator>
+
+don't know the size we want to reserve
+
+back insertor, a special type of iterator that allocates more space as necessary
+
+copy(v.begin(),v.end(),back_insertor(w),)
+
+don't have to manually reserver extra space, copy can be used as shown 
